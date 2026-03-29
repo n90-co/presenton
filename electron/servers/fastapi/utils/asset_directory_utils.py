@@ -2,7 +2,22 @@ import os
 from typing import Optional
 from urllib.parse import urlparse, unquote
 
-from utils.get_env import get_app_data_directory_env
+from utils.get_env import get_app_data_directory_env, get_next_public_fast_api_env
+
+
+def to_frontend_asset_url(path: str) -> str:
+    """Prefix mounted asset paths with FastAPI origin when available."""
+    if not path or path.startswith("http://") or path.startswith("https://"):
+        return path
+
+    if not (path.startswith("/app_data/") or path.startswith("/static/")):
+        return path
+
+    fastapi_origin = (get_next_public_fast_api_env() or "").strip()
+    if not fastapi_origin:
+        return path
+
+    return f"{fastapi_origin.rstrip('/')}{path}"
 
 
 def resolve_image_path_to_filesystem(path_or_url: str) -> Optional[str]:
