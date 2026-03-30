@@ -101,7 +101,7 @@ const N90Footer: React.FC<{ companyName?: string }> = ({ companyName }) => (
 )
 
 const ContentSlideLayout: React.FC<ContentSlideLayoutProps> = ({ data: slideData }) => {
-  const bullets = slideData?.bullets || Schema._def.defaultValue().bullets
+  const bullets = slideData?.bullets || []
   const companyName = (slideData as any)?.__companyName__
 
   return (
@@ -127,7 +127,7 @@ const ContentSlideLayout: React.FC<ContentSlideLayoutProps> = ({ data: slideData
           fontSize: '15px', lineHeight: 1.65, color: 'var(--cds-text-secondary, #6f6f6f)',
           margin: '0 0 24px', textAlign: 'left', maxWidth: '800px',
         }}>
-          {slideData?.description || Schema._def.defaultValue().description}
+          {slideData?.description || 'The IDE traces influence across every channel and every signal through one unified taxonomy.'}
         </p>
 
         {/* Carbon Tile cards — matching abt-signals pattern */}

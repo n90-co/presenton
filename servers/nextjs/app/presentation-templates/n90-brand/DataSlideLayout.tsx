@@ -130,7 +130,7 @@ const DataSlideLayout: React.FC<DataSlideLayoutProps> = ({ data: slideData }) =>
           </h2>
           {/* Insight */}
           <p style={{ fontSize: '14px', lineHeight: 1.6, color: '#c6c6c6', margin: '0 0 24px', textAlign: 'left' }}>
-            {slideData?.insight || Schema._def.defaultValue().insight}
+            {slideData?.insight || 'Real-time detection across 254 TV markets. Microsecond event ordering. Over a million geographic entities.'}
           </p>
           {/* Highlight stat */}
           {slideData?.highlightStat && (

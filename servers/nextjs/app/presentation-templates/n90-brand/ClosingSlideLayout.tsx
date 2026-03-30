@@ -74,7 +74,7 @@ const ClosingSlideLayout: React.FC<ClosingSlideLayoutProps> = ({ data: slideData
             {slideData?.headline || "Let's build something true."}
           </h2>
           <p style={{ fontSize: '15px', lineHeight: 1.65, color: '#c6c6c6', margin: '0 0 8px', textAlign: 'left' }}>
-            {slideData?.closingText || Schema._def.defaultValue().closingText}
+            {slideData?.closingText || "The commitment is simple: represent reality. The data sometimes shows your best-performing channel isn't performing. We show you anyway."}
           </p>
           <p style={{ fontSize: '16px', fontWeight: 500, color: '#f4f4f4', margin: '0 0 24px', textAlign: 'left' }}>
             {slideData?.emphasis || "That's the commitment."}
