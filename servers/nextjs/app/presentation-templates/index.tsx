@@ -166,8 +166,14 @@ import N90SectionDividerLayout, { Schema as N90SectionSchema, layoutId as N90Sec
 import N90ContentSlideLayout, { Schema as N90ContentSchema, layoutId as N90ContentId, layoutName as N90ContentName, layoutDescription as N90ContentDesc } from "./n90-brand/ContentSlideLayout";
 import N90DataSlideLayout, { Schema as N90DataSchema, layoutId as N90DataId, layoutName as N90DataName, layoutDescription as N90DataDesc } from "./n90-brand/DataSlideLayout";
 import N90ClosingSlideLayout, { Schema as N90ClosingSchema, layoutId as N90ClosingId, layoutName as N90ClosingName, layoutDescription as N90ClosingDesc } from "./n90-brand/ClosingSlideLayout";
-
-
+import N90QuoteSlideLayout, { Schema as N90QuoteSchema, layoutId as N90QuoteId, layoutName as N90QuoteName, layoutDescription as N90QuoteDesc } from "./n90-brand/QuoteSlideLayout";
+import N90TimelineSlideLayout, { Schema as N90TimelineSchema, layoutId as N90TimelineId, layoutName as N90TimelineName, layoutDescription as N90TimelineDesc } from "./n90-brand/TimelineSlideLayout";
+import N90ChallengeOutcomeLayout, { Schema as N90ChallengeSchema, layoutId as N90ChallengeId, layoutName as N90ChallengeName, layoutDescription as N90ChallengeDesc } from "./n90-brand/ChallengeOutcomeLayout";
+import N90NumberedStepsLayout, { Schema as N90StepsSchema, layoutId as N90StepsId, layoutName as N90StepsName, layoutDescription as N90StepsDesc } from "./n90-brand/NumberedStepsLayout";
+import N90TableComparisonLayout, { Schema as N90TableSchema, layoutId as N90TableId, layoutName as N90TableName, layoutDescription as N90TableDesc } from "./n90-brand/TableComparisonLayout";
+import N90StorytellingLayout, { Schema as N90StorySchema, layoutId as N90StoryId, layoutName as N90StoryName, layoutDescription as N90StoryDesc } from "./n90-brand/StorytellingLayout";
+import N90SignalCardsLayout, { Schema as N90SignalSchema, layoutId as N90SignalId, layoutName as N90SignalName, layoutDescription as N90SignalDesc } from "./n90-brand/SignalCardsLayout";
+import N90TeamSlideLayout, { Schema as N90TeamSchema, layoutId as N90TeamId, layoutName as N90TeamName, layoutDescription as N90TeamDesc } from "./n90-brand/TeamSlideLayout";
 
 
 
@@ -353,6 +359,14 @@ export const n90BrandTemplates: TemplateWithData[] = [
     createTemplateEntry(N90ContentSlideLayout, N90ContentSchema, N90ContentId, N90ContentName, N90ContentDesc, "n90-brand", "ContentSlideLayout"),
     createTemplateEntry(N90DataSlideLayout, N90DataSchema, N90DataId, N90DataName, N90DataDesc, "n90-brand", "DataSlideLayout"),
     createTemplateEntry(N90ClosingSlideLayout, N90ClosingSchema, N90ClosingId, N90ClosingName, N90ClosingDesc, "n90-brand", "ClosingSlideLayout"),
+    createTemplateEntry(N90QuoteSlideLayout, N90QuoteSchema, N90QuoteId, N90QuoteName, N90QuoteDesc, "n90-brand", "QuoteSlideLayout"),
+    createTemplateEntry(N90TimelineSlideLayout, N90TimelineSchema, N90TimelineId, N90TimelineName, N90TimelineDesc, "n90-brand", "TimelineSlideLayout"),
+    createTemplateEntry(N90ChallengeOutcomeLayout, N90ChallengeSchema, N90ChallengeId, N90ChallengeName, N90ChallengeDesc, "n90-brand", "ChallengeOutcomeLayout"),
+    createTemplateEntry(N90NumberedStepsLayout, N90StepsSchema, N90StepsId, N90StepsName, N90StepsDesc, "n90-brand", "NumberedStepsLayout"),
+    createTemplateEntry(N90TableComparisonLayout, N90TableSchema, N90TableId, N90TableName, N90TableDesc, "n90-brand", "TableComparisonLayout"),
+    createTemplateEntry(N90StorytellingLayout, N90StorySchema, N90StoryId, N90StoryName, N90StoryDesc, "n90-brand", "StorytellingLayout"),
+    createTemplateEntry(N90SignalCardsLayout, N90SignalSchema, N90SignalId, N90SignalName, N90SignalDesc, "n90-brand", "SignalCardsLayout"),
+    createTemplateEntry(N90TeamSlideLayout, N90TeamSchema, N90TeamId, N90TeamName, N90TeamDesc, "n90-brand", "TeamSlideLayout"),
 ];
 
 // TODO: Step 4: Combine all templates into a single array For UseCases (like the ones below)
