@@ -2,10 +2,74 @@
 
 When generating content for the NEXT90 (n90-brand) template, follow these rules strictly.
 
+## Content Access
+- The NEXT90 website is live at **https://staging.n90.co** — fetch page content from there for approved copy
+- Blog posts are at staging.n90.co/blog/[slug] — use these as source material for slide content
+- All approved copy, stats, and positioning language comes from the website — do NOT invent new messaging
+- Dashboard screenshots are uploaded by the user via API or file upload — never generate fake dashboard images
+
+## Audience Personas
+
+### Agency Strategist
+- **Role:** Media planning, campaign strategy, vendor evaluation
+- **Pain:** Can't reconcile cross-media attribution, platforms grade their own homework
+- **Wants:** One view across all channels, data that feeds back to buying platforms
+- **Modules:** A1 (Attribution) + B (IDE) + D (Demo) + F (Onboarding)
+
+### CMO / VP Marketing
+- **Role:** Budget owner, reports to CEO/board, accountable for ROI
+- **Pain:** Can't prove marketing impact, wasted spend, no single source of truth
+- **Wants:** Revenue-linked measurement, board-ready reporting, competitive edge
+- **Modules:** A1 (Attribution) + A2 (Waste) + C (Credibility) + E (Methodology) + F (Onboarding)
+
+### Media Director / Buyer
+- **Role:** Hands-on media execution, daypart/market optimization
+- **Pain:** Dead zones, no geographic granularity, platform data doesn't match reality
+- **Wants:** Market-level response data, dead zone identification, programmatic activation
+- **Modules:** A3 (Dead Zones) + B (IDE) + D (Demo) + G (Expansion)
+
+### Publisher / Broadcaster
+- **Role:** Proving the value of their inventory to advertisers
+- **Pain:** TV/broadcast being devalued by digital-first attribution
+- **Wants:** Evidence that broadcast drives measurable digital response
+- **Modules:** A1 (Attribution) + E (Methodology) + D (Demo) + C (Credibility)
+
+## Meeting Stages
+
+### Stage 1: First Meeting / Discovery
+- **Goal:** Establish the problem, build credibility, earn the next meeting
+- **Tone:** Educational, problem-solving, not product-focused
+- **Modules:** A1 (Attribution broken) + B (IDE reframe) + C (Credibility) + F (Next steps)
+- **Duration:** 6-10 slides, 15-20 minutes
+- **Do:** Lead with their pain, show you understand the industry
+- **Don't:** Demo the product yet, show pricing, overwhelm with data
+
+### Stage 2: Technical Deep-Dive
+- **Goal:** Prove the science, show the data, demonstrate the product
+- **Tone:** Technical, evidence-based, specific to their use case
+- **Modules:** A1 + A3 (Dead Zones) + E (Methodology) + D (Demo/Dashboard) + G (Expansion)
+- **Duration:** 12-18 slides, 30-45 minutes
+- **Do:** Show gamma curves, geographic resolution, actual dashboard output
+- **Don't:** Repeat the problem framing they already heard
+
+### Stage 3: Proposal / Close
+- **Goal:** Summarize value, present onboarding plan, get commitment
+- **Tone:** Confident, specific to their business, forward-looking
+- **Modules:** B (IDE) + C (Credibility) + D (Demo with their market data) + F (Onboarding) + closing
+- **Duration:** 8-12 slides, 20-30 minutes
+- **Do:** Reference specific insights from their data, show the onboarding timeline
+- **Don't:** Re-argue the problem, introduce new concepts
+
+## Image Policy
+- **Use approved library first** — 27 hero images + 60 pictograms bundled in /n90-assets/
+- **Only generate new images** if no existing image matches the concept
+- **Dashboard screenshots are user-provided** — never generate fake dashboard images
+- **Never use stock photos** — all imagery must be atmospheric/editorial matching the brand
+
 ## Voice and Tone
 - Write as NEXT90 — a measurement company committed to truth, not a vendor pitching a product
 - Use "we" for NEXT90, never "our company" or "NEXT90 Inc."
-- The audience is CMOs, VPs of Marketing, media directors, and agency strategists
+- The audience depends on the persona (see above) — adjust language accordingly
 - Solve problems, don't sell features. Frame everything through the cognitive journey: problem → reframe → proof → data → next steps
 - Never use buzzwords: "synergy", "leverage", "best-in-class", "cutting-edge", "revolutionary"
 - Never describe NEXT90 as a "TV measurement company" — it traces influence across ALL signals
