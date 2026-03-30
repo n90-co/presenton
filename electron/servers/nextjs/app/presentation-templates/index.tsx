@@ -160,6 +160,12 @@ import TitleDescriptionSixChartsGridLayout, { Schema as TitleDescriptionSixChart
 import TitleDescriptionSixChartsFourMetricsLayout, { Schema as TitleDescriptionSixChartsFourMetricsSchema, layoutId as TitleDescriptionSixChartsFourMetricsId, layoutName as TitleDescriptionSixChartsFourMetricsName, layoutDescription as TitleDescriptionSixChartsFourMetricsDesc } from './neo-swift/TitleDescriptionSixChartsFourMetrics';
 import TitleDescriptionFourChartsSixBulletsLayout, { Schema as TitleDescriptionFourChartsSixBulletsSchema, layoutId as TitleDescriptionFourChartsSixBulletsId, layoutName as TitleDescriptionFourChartsSixBulletsName, layoutDescription as TitleDescriptionFourChartsSixBulletsDesc } from './neo-swift/TitleDescriptionFourChartsSixBullets';
 
+// NEXT90 brand templates
+import N90TitleSlideLayout, { Schema as N90TitleSchema, layoutId as N90TitleId, layoutName as N90TitleName, layoutDescription as N90TitleDesc } from "./n90-brand/TitleSlideLayout";
+import N90SectionDividerLayout, { Schema as N90SectionSchema, layoutId as N90SectionId, layoutName as N90SectionName, layoutDescription as N90SectionDesc } from "./n90-brand/SectionDividerLayout";
+import N90ContentSlideLayout, { Schema as N90ContentSchema, layoutId as N90ContentId, layoutName as N90ContentName, layoutDescription as N90ContentDesc } from "./n90-brand/ContentSlideLayout";
+import N90DataSlideLayout, { Schema as N90DataSchema, layoutId as N90DataId, layoutName as N90DataName, layoutDescription as N90DataDesc } from "./n90-brand/DataSlideLayout";
+import N90ClosingSlideLayout, { Schema as N90ClosingSchema, layoutId as N90ClosingId, layoutName as N90ClosingName, layoutDescription as N90ClosingDesc } from "./n90-brand/ClosingSlideLayout";
 
 
 
@@ -175,7 +181,7 @@ import neoGeneralSettings from "./neo-general/settings.json";
 import neoStandardSettings from "./neo-standard/settings.json";
 import neoModernSettings from "./neo-modern/settings.json";
 import neoSwiftSettings from "./neo-swift/settings.json";
-
+import n90BrandSettings from "./n90-brand/settings.json";
 
 // Helper to create template entry
 
@@ -224,7 +230,6 @@ export const neoGeneralTemplates: TemplateWithData[] = [
     createTemplateEntry(TitleDescriptionMultiChartGridWithMetricsLayout, TitleDescriptionMultiChartGridWithMetricsSchema, TitleDescriptionMultiChartGridWithMetricsId, TitleDescriptionMultiChartGridWithMetricsName, TitleDescriptionMultiChartGridWithMetricsDesc, "neo-general", "TitleDescriptionMultiChartGridWithMetrics"),
     createTemplateEntry(TitleDescriptionMultiChartGridWithBulletsLayout, TitleDescriptionMultiChartGridWithBulletsSchema, TitleDescriptionMultiChartGridWithBulletsId, TitleDescriptionMultiChartGridWithBulletsName, TitleDescriptionMultiChartGridWithBulletsDesc, "neo-general", "TitleDescriptionMultiChartGridWithBullets"),
 ]
-
 export const neoStandardTemplates: TemplateWithData[] = [
     createTemplateEntry(TitleBadgeChartLayout, TitleBadgeChartSchema, TitleBadgeChartId, TitleBadgeChartName, TitleBadgeChartDesc, "neo-standard", "TitleBadgeChartLayout"),
     createTemplateEntry(TitleDescriptionBulletListStandardLayout, TitleDescriptionBulletListStandardSchema, TitleDescriptionBulletListStandardId, TitleDescriptionBulletListStandardName, TitleDescriptionBulletListStandardDesc, "neo-standard", "TitleDescriptionBulletList"),
@@ -341,6 +346,15 @@ export const swiftTemplates: TemplateWithData[] = [
     createTemplateEntry(Timeline, TimelineSchema, TimelineId, TimelineName, TimelineDesc, "swift", "Timeline"),
 ];
 
+// NEXT90 brand templates
+export const n90BrandTemplates: TemplateWithData[] = [
+    createTemplateEntry(N90TitleSlideLayout, N90TitleSchema, N90TitleId, N90TitleName, N90TitleDesc, "n90-brand", "TitleSlideLayout"),
+    createTemplateEntry(N90SectionDividerLayout, N90SectionSchema, N90SectionId, N90SectionName, N90SectionDesc, "n90-brand", "SectionDividerLayout"),
+    createTemplateEntry(N90ContentSlideLayout, N90ContentSchema, N90ContentId, N90ContentName, N90ContentDesc, "n90-brand", "ContentSlideLayout"),
+    createTemplateEntry(N90DataSlideLayout, N90DataSchema, N90DataId, N90DataName, N90DataDesc, "n90-brand", "DataSlideLayout"),
+    createTemplateEntry(N90ClosingSlideLayout, N90ClosingSchema, N90ClosingId, N90ClosingName, N90ClosingDesc, "n90-brand", "ClosingSlideLayout"),
+];
+
 // TODO: Step 4: Combine all templates into a single array For UseCases (like the ones below)
 // All templates combined
 export const allLayouts: TemplateWithData[] = [
@@ -352,14 +366,20 @@ export const allLayouts: TemplateWithData[] = [
     ...modernTemplates,
     ...standardTemplates,
     ...swiftTemplates,
-
-
+    ...n90BrandTemplates,
 ];
 
 
 // TODO: Step 5: Combine all templates into a single array For UseCases (like the ones below)
 // For UseCases we need to combine all templates into a single array with settings
 export const templates: TemplateLayoutsWithSettings[] = [
+    {
+        id: "n90-brand",
+        name: "NEXT90",
+        description: n90BrandSettings.description,
+        settings: n90BrandSettings as TemplateGroupSettings,
+        layouts: n90BrandTemplates,
+    },
     {
         id: "neo-general",
         name: "Neo General",
