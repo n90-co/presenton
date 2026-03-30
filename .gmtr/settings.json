@@ -1,0 +1,38 @@
+{
+  "version": "2.0",
+  "config_version": "2.1",
+  "project_entity_id": null,
+  "project_id": "n90-co/presenton",
+  "project_name": "presenton",
+  "previously_known_as": [],
+  "git_remote": "https://github.com/n90-co/presenton.git",
+  "current_session": {
+    "session_id": "df401362-4213-4e41-af97-078683f53375",
+    "transcript_path": "/Users/brian/.claude/projects/-Users-brian-Documents-GitHub-local-work-n90-website-2026/df401362-4213-4e41-af97-078683f53375.jsonl",
+    "last_updated": "2026-03-30T01:02:41Z",
+    "token_limit": 200000
+  },
+  "last_compact": null,
+  "continuity_stats": {
+    "successful_restores": 0,
+    "failed_restores": 0,
+    "total_sessions": 1,
+    "total_compacts": 0,
+    "total_clears": 0,
+    "last_restore_quality": "none",
+    "total_compacts_prevented": 0
+  },
+  "related_entities": {
+    "databases": [],
+    "people": [],
+    "services": [],
+    "concepts": [],
+    "projects": []
+  },
+  "last_session_id": "df401362-4213-4e41-af97-078683f53375",
+  "metadata": {
+    "created": "2026-03-30T01:02:41Z",
+    "updated": "2026-03-30T03:11:44Z",
+    "last_session_end_reason": "new"
+  }
+}

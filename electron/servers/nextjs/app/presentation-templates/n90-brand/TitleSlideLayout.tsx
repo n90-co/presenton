@@ -20,7 +20,7 @@ const titleSlideSchema = z.object({
     description: "Presentation date — use current month and year",
   }),
   backgroundImage: ImageSchema.default({
-    __image_url__: 'https://staging.n90.co/images/live-map-hero.jpg',
+    __image_url__: '/n90-assets/images/live-map-hero.jpg',
     __image_prompt__: 'Globe from space showing US with glowing activity markers across cities and TV markets'
   }).meta({
     description: "Atmospheric background image — positioned right with gradient fade left",
@@ -35,7 +35,7 @@ interface TitleSlideLayoutProps {
 }
 
 const TitleSlideLayout: React.FC<TitleSlideLayoutProps> = ({ data: slideData }) => {
-  const bgUrl = slideData?.backgroundImage?.__image_url__ || 'https://staging.n90.co/images/live-map-hero.jpg'
+  const bgUrl = slideData?.backgroundImage?.__image_url__ || '/n90-assets/images/live-map-hero.jpg'
 
   return (
     <div
@@ -59,7 +59,7 @@ const TitleSlideLayout: React.FC<TitleSlideLayoutProps> = ({ data: slideData }) 
       <div className="relative z-10 flex flex-col h-full" style={{ padding: '48px 64px' }}>
         {/* Logo */}
         <img
-          src={(slideData as any)?.__logo_url__ || 'https://staging.n90.co/images/next90-logo-new2-reversed-tight.png'}
+          src={(slideData as any)?.__logo_url__ || '/n90-assets/logos/next90-logo-new2-reversed-tight.png'}
           alt="NEXT90"
           style={{ height: '22px', width: 'auto' }}
         />

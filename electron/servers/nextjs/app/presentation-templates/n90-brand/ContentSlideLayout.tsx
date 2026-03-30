@@ -29,9 +29,9 @@ const contentSlideSchema = z.object({
     description: "Body paragraph supporting the title",
   }),
   bullets: z.array(bulletSchema).min(2).max(4).default([
-    { heading: 'Context', description: 'What else was happening — weather, programming, day of week, competitive activity.', icon: { __icon_url__: 'https://staging.n90.co/pictograms/context.svg', __icon_query__: 'context analysis' } },
-    { heading: 'Geography', description: 'Which market to measure — 254 TV markets, over 1M geographic entities.', icon: { __icon_url__: 'https://staging.n90.co/pictograms/geography.svg', __icon_query__: 'geographic location' } },
-    { heading: 'Time', description: 'When the ad aired and when the response occurred — gamma time-decay calibration.', icon: { __icon_url__: 'https://staging.n90.co/pictograms/time.svg', __icon_query__: 'time clock' } },
+    { heading: 'Context', description: 'What else was happening — weather, programming, day of week, competitive activity.', icon: { __icon_url__: '/n90-assets/pictograms/context.svg', __icon_query__: 'context analysis' } },
+    { heading: 'Geography', description: 'Which market to measure — 254 TV markets, over 1M geographic entities.', icon: { __icon_url__: '/n90-assets/pictograms/geography.svg', __icon_query__: 'geographic location' } },
+    { heading: 'Time', description: 'When the ad aired and when the response occurred — gamma time-decay calibration.', icon: { __icon_url__: '/n90-assets/pictograms/time.svg', __icon_query__: 'time clock' } },
   ]).meta({
     description: "2-4 cards with headings, descriptions, and Carbon pictogram icons from n90.co/pictograms/",
   }),
@@ -58,7 +58,7 @@ const N90Header: React.FC<{ activeTab?: string; companyName?: string }> = ({ act
       top: 0, left: 0, right: 0,
       zIndex: 20,
     }}>
-      <img src="https://staging.n90.co/logos/next90-logo-new-tight.svg" alt="NEXT90" style={{ height: '18px' }} />
+      <img src="/n90-assets/logos/next90-logo-new-tight.svg" alt="NEXT90" style={{ height: '18px' }} />
       <div style={{ marginLeft: 'auto', display: 'flex', gap: 0 }}>
         {tabs.map(tab => (
           <span key={tab} style={{
