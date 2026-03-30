@@ -1,0 +1,35 @@
+# NEXT90 Presenton — Thin overlay on monolith base
+#
+# Two-layer strategy:
+# 1. Base image (presenton-monolith:test) — rebuild rarely, contains all deps
+# 2. This overlay — copies n90-brand templates + assets, runs npm build
+#    Rebuilding this is fast (~60s) because deps are already installed
+#
+# When you add/modify a template:
+#   git pull && docker build -f Dockerfile.n90 -t harbor.bws.n90.co/n90/presenton:0.6.3-n90.X .
+#   kubectl rollout restart ...
+#
+# No need to rebuild the full monolith unless upstream Presenton updates.
+
+FROM presenton-monolith:test
+
+# Copy NEXT90 templates (overwrites any existing)
+COPY servers/nextjs/app/presentation-templates/n90-brand/ \
+     /app/servers/nextjs/app/presentation-templates/n90-brand/
+
+# Copy patched index.tsx with n90-brand registrations
+COPY servers/nextjs/app/presentation-templates/index.tsx \
+     /app/servers/nextjs/app/presentation-templates/index.tsx
+
+# Copy n90-assets (27 images, 60 pictograms, 2 logos)
+COPY servers/nextjs/public/n90-assets/ \
+     /app/servers/nextjs/public/n90-assets/
+
+# Rebuild Next.js to compile the new templates into the bundle
+WORKDIR /app/servers/nextjs
+RUN npm run build
+
+WORKDIR /app
+
+# Original entrypoint
+CMD ["node", "/app/start.js"]
