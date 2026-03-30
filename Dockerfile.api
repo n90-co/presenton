@@ -1,0 +1,51 @@
+# NEXT90 Presenton API — FastAPI + MCP + Chromium + LibreOffice + docling
+# Handles LLM calls, PPTX generation, PDF export, document parsing
+# ~1.2GB final image (Python + Chromium + LibreOffice)
+
+FROM python:3.11-slim-bookworm
+
+# Install system dependencies
+# - chromium: PDF/PPTX export via Puppeteer
+# - libreoffice: PPTX → PDF → PNG screenshot pipeline
+# - fontconfig: font rendering for exports
+# - zstd: compression support
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    chromium \
+    libreoffice \
+    fontconfig \
+    zstd \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Set environment variables
+ENV APP_DATA_DIRECTORY=/app_data
+ENV TEMP_DIRECTORY=/tmp/presenton
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+
+# Install Python dependencies
+# Core API + LLM clients + document parsing
+RUN pip install --no-cache-dir \
+    alembic aiohttp aiomysql aiosqlite asyncpg \
+    fastapi[standard] \
+    pathvalidate pdfplumber chromadb sqlmodel \
+    anthropic google-genai openai fastmcp dirtyjson
+
+# Install docling for document upload/parsing (includes PyTorch CPU)
+RUN pip install --no-cache-dir docling --extra-index-url https://download.pytorch.org/whl/cpu
+
+# Copy FastAPI application
+COPY servers/fastapi/ ./servers/fastapi/
+
+# Copy start script and license
+COPY start.js LICENSE NOTICE ./
+
+# Create app_data directory
+RUN mkdir -p /app_data /tmp/presenton
+
+EXPOSE 8000 8001
+
+# Start FastAPI (port 8000) + MCP server (port 8001)
+# We use a simple shell script instead of the monolithic start.js
+CMD ["sh", "-c", "python servers/fastapi/server.py --port 8000 --reload false & python servers/fastapi/mcp_server.py --port 8001 & wait"]
