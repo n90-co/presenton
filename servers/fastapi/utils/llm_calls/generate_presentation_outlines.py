@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import Optional
 
 from models.llm_message import LLMSystemMessage, LLMUserMessage
+from utils.brand_prompt_loader import get_brand_instructions
 from models.llm_tools import SearchWebTool
 from services.llm_client import LLMClient
 from utils.get_dynamic_models import get_presentation_outline_model_with_n_slides
@@ -14,14 +15,18 @@ def get_system_prompt(
     verbosity: Optional[str] = None,
     instructions: Optional[str] = None,
     include_title_slide: bool = True,
+    template_id: Optional[str] = None,
 ):
+    # Load brand-specific rules if a branded template is selected
+    brand_instructions = get_brand_instructions(template_id, instructions) if template_id else instructions
+
     return f"""
         You are an expert presentation creator. Generate structured presentations based on user requirements and format them according to the specified JSON schema with markdown content.
 
         Try to use available tools for better results.
 
-        {"# User Instruction:" if instructions else ""}
-        {instructions or ""}
+        {"# Brand & User Instructions:" if brand_instructions else ""}
+        {brand_instructions or ""}
 
         {"# Tone:" if tone else ""}
         {tone or ""}

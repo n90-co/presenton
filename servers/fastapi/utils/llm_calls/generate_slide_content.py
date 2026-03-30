@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Optional
 from models.llm_message import LLMSystemMessage, LLMUserMessage
+from utils.brand_prompt_loader import get_brand_instructions
 from models.presentation_layout import SlideLayoutModel
 from models.presentation_outline_model import SlideOutlineModel
 from services.llm_client import LLMClient
@@ -13,12 +14,16 @@ def get_system_prompt(
     tone: Optional[str] = None,
     verbosity: Optional[str] = None,
     instructions: Optional[str] = None,
+    template_id: Optional[str] = None,
 ):
+    # Load brand-specific rules if a branded template is selected
+    brand_instructions = get_brand_instructions(template_id, instructions) if template_id else instructions
+
     return f"""
         Generate structured slide based on provided outline, follow mentioned steps and notes and provide structured output.
 
-        {"# User Instructions:" if instructions else ""}
-        {instructions or ""}
+        {"# Brand & User Instructions:" if brand_instructions else ""}
+        {brand_instructions or ""}
 
         {"# Tone:" if tone else ""}
         {tone or ""}
