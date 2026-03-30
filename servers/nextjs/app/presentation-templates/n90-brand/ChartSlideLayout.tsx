@@ -40,14 +40,23 @@ const chartSlideSchema = z.object({
     description: "Y-axis label",
   }),
   chartData: z.array(chartDataPointSchema).min(4).max(20).default([
-    { label: '0s', value: 5, group: 'Response' },
-    { label: '10s', value: 85, group: 'Response' },
+    { label: '0s', value: 2, group: 'Response' },
+    { label: '5s', value: 45, group: 'Response' },
+    { label: '10s', value: 88, group: 'Response' },
+    { label: '15s', value: 78, group: 'Response' },
     { label: '20s', value: 62, group: 'Response' },
+    { label: '25s', value: 50, group: 'Response' },
     { label: '30s', value: 41, group: 'Response' },
-    { label: '45s', value: 24, group: 'Response' },
-    { label: '60s', value: 14, group: 'Response' },
-    { label: '75s', value: 8, group: 'Response' },
+    { label: '35s', value: 33, group: 'Response' },
+    { label: '40s', value: 27, group: 'Response' },
+    { label: '45s', value: 22, group: 'Response' },
+    { label: '50s', value: 18, group: 'Response' },
+    { label: '55s', value: 15, group: 'Response' },
+    { label: '60s', value: 12, group: 'Response' },
+    { label: '70s', value: 8, group: 'Response' },
+    { label: '80s', value: 6, group: 'Response' },
     { label: '90s', value: 4, group: 'Response' },
+    { label: '105s', value: 3, group: 'Response' },
     { label: '120s', value: 2, group: 'Response' },
   ]).meta({
     description: "Chart data points. Each has a label (x-axis), value (y-axis), and group (series name). Provide real or realistic data.",
@@ -130,27 +139,45 @@ const ChartSlideLayout: React.FC<ChartSlideLayoutProps> = ({ data: slideData }) 
             <line x1={chartLeft} y1={chartTop} x2={chartLeft} y2={chartTop + chartHeight} stroke="#525252" strokeWidth="1" />
             <line x1={chartLeft} y1={chartTop + chartHeight} x2={chartLeft + chartWidth} y2={chartTop + chartHeight} stroke="#525252" strokeWidth="1" />
 
-            {/* Data line */}
-            {chartData.length > 1 && (
-              <polyline
-                fill="none"
-                stroke="#0f62fe"
-                strokeWidth="2.5"
-                strokeLinejoin="round"
-                points={chartData.map((d: any, i: number) => {
-                  const x = chartLeft + (i / (chartData.length - 1)) * chartWidth
-                  const y = chartTop + chartHeight - (d.value / maxVal) * chartHeight
-                  return `${x},${y}`
-                }).join(' ')}
-              />
-            )}
+            {/* Smooth data curve + area fill */}
+            {chartData.length > 1 && (() => {
+              const pts = chartData.map((d: any, i: number) => ({
+                x: chartLeft + (i / (chartData.length - 1)) * chartWidth,
+                y: chartTop + chartHeight - (d.value / maxVal) * chartHeight,
+              }))
 
-            {/* Data points */}
-            {chartData.map((d: any, i: number) => {
-              const x = chartLeft + (i / (chartData.length - 1)) * chartWidth
-              const y = chartTop + chartHeight - (d.value / maxVal) * chartHeight
-              return <circle key={i} cx={x} cy={y} r="3" fill="#0f62fe" />
-            })}
+              // Generate smooth cubic bezier path
+              let pathD = `M ${pts[0].x},${pts[0].y}`
+              for (let i = 0; i < pts.length - 1; i++) {
+                const p0 = pts[Math.max(0, i - 1)]
+                const p1 = pts[i]
+                const p2 = pts[i + 1]
+                const p3 = pts[Math.min(pts.length - 1, i + 2)]
+                const tension = 0.3
+                const cp1x = p1.x + (p2.x - p0.x) * tension
+                const cp1y = p1.y + (p2.y - p0.y) * tension
+                const cp2x = p2.x - (p3.x - p1.x) * tension
+                const cp2y = p2.y - (p3.y - p1.y) * tension
+                pathD += ` C ${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x},${p2.y}`
+              }
+
+              // Area fill path (close to bottom)
+              const areaD = pathD + ` L ${pts[pts.length-1].x},${chartTop + chartHeight} L ${pts[0].x},${chartTop + chartHeight} Z`
+
+              return (
+                <>
+                  {/* Gradient area fill */}
+                  <defs>
+                    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#0f62fe" stopOpacity="0.2" />
+                      <stop offset="100%" stopColor="#0f62fe" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path d={areaD} fill="url(#chartGrad)" />
+                  <path d={pathD} fill="none" stroke="#0f62fe" strokeWidth="2.5" />
+                </>
+              )
+            })()}
 
             {/* X-axis labels */}
             {chartData.map((d: any, i: number) => {
