@@ -27,7 +27,7 @@ ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 # Install Python dependencies
 # Core API + LLM clients + document parsing
 RUN pip install --no-cache-dir \
-    alembic aiohttp aiomysql aiosqlite asyncpg \
+    alembic aiohttp aiomysql aiosqlite asyncpg psycopg2-binary \
     fastapi[standard] \
     pathvalidate pdfplumber chromadb sqlmodel \
     anthropic google-genai openai fastmcp dirtyjson
