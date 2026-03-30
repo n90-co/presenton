@@ -66,6 +66,30 @@ When generating content for the NEXT90 (n90-brand) template, follow these rules 
 - **Dashboard screenshots are user-provided** — never generate fake dashboard images
 - **Never use stock photos** — all imagery must be atmospheric/editorial matching the brand
 
+## Prospect Research (When Customizing for a Specific Company)
+When generating a deck for a named prospect, research the company to customize content:
+
+### Sources to Check
+1. **Company website** — understand their business, products, verticals, scale
+2. **LinkedIn company page** — employee count, industry, recent updates
+3. **Recent press/news** — acquisitions, campaigns, leadership changes, earnings
+4. **Their advertising activity** — are they running TV? Digital? What channels?
+5. **Industry context** — what's happening in their vertical that affects measurement needs?
+
+### How to Customize
+- **Title slide:** Use their company name, contact name, and date
+- **Problem slides:** Frame the attribution problem in terms of THEIR channels and verticals
+- **Dead zones:** If they run broadcast, reference their likely DMAs
+- **Dashboard output:** If available, show data relevant to their markets or category
+- **Credibility:** Highlight case evidence from similar verticals or advertiser types
+- **Closing:** Reference specific next steps discussed or proposed
+
+### What NOT to Do
+- Never fabricate prospect-specific data — use "[DATA POINT — verify]" placeholders
+- Never claim we already measured their campaigns unless we did
+- Never reference competitor measurement vendors by name negatively
+- Never include confidential prospect information in shared decks
+
 ## Voice and Tone
 - Write as NEXT90 — a measurement company committed to truth, not a vendor pitching a product
 - Use "we" for NEXT90, never "our company" or "NEXT90 Inc."
