@@ -59,9 +59,52 @@ Presentations follow the KYKC (Know Yourself, Know Your Customer) framework:
 - Not a vendor engagement — a measurement system you own
 - Self-serve dashboard with AI assistant
 
+## Geography Stack (Use in Geography-Related Slides)
+The IDE's geographic resolution goes far beyond DMA and ZIP code. Use this full stack when discussing geographic capabilities:
+
+- **DMA (Designated Market Area)** — 210 US DMAs, 44 Canadian broadcast markets (254 total)
+- **Canadian geocartography** — broadcast market boundaries we built because they didn't exist
+- **Cable zone sub-markets** — sub-DMA zones defined by cable system footprints
+- **County** — 3,143 US counties
+- **ZIP/Postal code** — 41,000+ US ZIP codes, Canadian postal codes
+- **Census tract / block group** — block-level demographic resolution
+- **Custom geo-fences** — arbitrary polygons for outdoor, DOOH, retail trade areas
+- **Household** — individual household resolution via deterministic identity
+- **Over 1 million geographic entities** total across US and Canada
+
+Each event is resolved to its actual delivery footprint — not an approximation, not a model. If a stimulus didn't reach a geography, nobody there can be influenced by it.
+
+## Dashboard Output (Use in Demo Slides)
+When showing IDE dashboard output:
+- Show market-level response visualization (heat maps across DMAs)
+- Show the full journey: ad airing → organic search → website visit → phone call → booking → revenue
+- Show the AI assistant query interface (plain-language data questions)
+- Show daypart and genre performance breakdowns
+- Show weather overlay on response data
+- Show the gamma response curve in context of a real campaign
+
+## Approved Statistics (Guardrail — Only Use These)
+| Stat | Source | Context |
+|------|--------|---------|
+| 200M+ | NEXT90 internal | Ad airings traced across North America |
+| 254 | NEXT90 internal | TV markets (210 US DMAs + 44 Canadian broadcast markets) |
+| 50+ | Patent portfolio | Patents in cross-media technology (VEIL/Koplar + Handrigan) |
+| 1M+ | NEXT90 internal | Geographic entities across US and Canada |
+| 64% | NEXT90 IDE analysis | TV-attributed web sessions within 90 seconds of ad airing |
+| 947,000 | NEXT90 IDE | Web sessions used to calibrate gamma response curve |
+| 8 | USPTO | Patents where Brian Handrigan is named inventor |
+| #556 | Inc. 5000 (2023) | Company rank — 1,056% three-year revenue growth |
+| 26 years | Brian's career | Years in advertising technology |
+| 20+ years | Randy's career | Years from tech leadership to business operations |
+
+**Do NOT invent statistics.** If a slide needs a number that isn't in this table, leave a placeholder: "[DATA POINT — verify with NEXT90 team]"
+
 ## Prohibited Content
 - Never claim NEXT90 is "the only" or "the first" anything
 - Never use red/error colors for competitor approaches — use neutral gray
-- Never make up statistics — use only the verified numbers above
+- Never make up statistics — use only the verified numbers in the approved table above
 - Never include pricing or commercial terms in generated slides
 - Never reference internal tools, code names, or unpublished patents
+- Never describe NEXT90 as a "TV measurement company" — it traces influence across ALL signals
+- Never use "stimulus" in customer-facing copy — use "your ad"
+- Never center-align body text

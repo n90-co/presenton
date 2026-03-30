@@ -201,20 +201,14 @@ const ChartSlideLayout: React.FC<ChartSlideLayoutProps> = ({ data: slideData }) 
               )
             })()}
 
-            {/* X-axis labels */}
-            {chartData.map((d: any, i: number) => {
-              const x = chartLeft + (i / (chartData.length - 1)) * chartWidth
-              return <text key={i} x={x} y={chartTop + chartHeight + 16} textAnchor="middle" fill="#8d8d8d" fontSize="9" fontFamily="IBM Plex Sans">{d.label}</text>
-            })}
-
             {/* Y-axis label */}
             <text x={12} y={chartTop + chartHeight / 2} textAnchor="middle" fill="#8d8d8d" fontSize="9" fontFamily="IBM Plex Sans" transform={`rotate(-90, 12, ${chartTop + chartHeight / 2})`}>
               {slideData?.yAxisLabel || 'Response probability'}
             </text>
 
-            {/* X-axis label */}
-            <text x={chartLeft + chartWidth / 2} y={chartTop + chartHeight + 35} textAnchor="middle" fill="#8d8d8d" fontSize="9" fontFamily="IBM Plex Sans">
-              {slideData?.xAxisLabel || 'Seconds after ad airing'}
+            {/* X-axis label — no tick values, just the axis name */}
+            <text x={chartLeft + chartWidth / 2} y={chartTop + chartHeight + 20} textAnchor="middle" fill="#8d8d8d" fontSize="9" fontFamily="IBM Plex Sans">
+              Time after stimulus
             </text>
           </svg>
 

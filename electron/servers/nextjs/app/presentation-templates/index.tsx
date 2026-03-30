@@ -175,6 +175,7 @@ import N90StorytellingLayout, { Schema as N90StorySchema, layoutId as N90StoryId
 import N90SignalCardsLayout, { Schema as N90SignalSchema, layoutId as N90SignalId, layoutName as N90SignalName, layoutDescription as N90SignalDesc } from "./n90-brand/SignalCardsLayout";
 import N90TeamSlideLayout, { Schema as N90TeamSchema, layoutId as N90TeamId, layoutName as N90TeamName, layoutDescription as N90TeamDesc } from "./n90-brand/TeamSlideLayout";
 import N90ChartSlideLayout, { Schema as N90ChartSchema, layoutId as N90ChartId, layoutName as N90ChartName, layoutDescription as N90ChartDesc } from "./n90-brand/ChartSlideLayout";
+import N90DashboardSlideLayout, { Schema as N90DashboardSchema, layoutId as N90DashboardId, layoutName as N90DashboardName, layoutDescription as N90DashboardDesc } from "./n90-brand/DashboardSlideLayout";
 
 
 
@@ -369,6 +370,7 @@ export const n90BrandTemplates: TemplateWithData[] = [
     createTemplateEntry(N90SignalCardsLayout, N90SignalSchema, N90SignalId, N90SignalName, N90SignalDesc, "n90-brand", "SignalCardsLayout"),
     createTemplateEntry(N90TeamSlideLayout, N90TeamSchema, N90TeamId, N90TeamName, N90TeamDesc, "n90-brand", "TeamSlideLayout"),
     createTemplateEntry(N90ChartSlideLayout, N90ChartSchema, N90ChartId, N90ChartName, N90ChartDesc, "n90-brand", "ChartSlideLayout"),
+    createTemplateEntry(N90DashboardSlideLayout, N90DashboardSchema, N90DashboardId, N90DashboardName, N90DashboardDesc, "n90-brand", "DashboardSlideLayout"),
 ];
 
 // TODO: Step 4: Combine all templates into a single array For UseCases (like the ones below)
