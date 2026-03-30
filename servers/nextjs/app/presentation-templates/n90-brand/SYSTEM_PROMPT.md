@@ -108,3 +108,337 @@ When showing IDE dashboard output:
 - Never describe NEXT90 as a "TV measurement company" — it traces influence across ALL signals
 - Never use "stimulus" in customer-facing copy — use "your ad"
 - Never center-align body text
+# NEXT90 Presentation Design System
+
+Design specification for the NEXT90 sales deck / presentation builder (Presenton). This document defines the visual language, slide types, navigation construct, and design tokens. The presenting agent should use this spec to build the Presenton template.
+
+Related: GitHub issue #38 (Presenton deployment), existing Slidev content at `slides/slides.md`.
+
+---
+
+## Design Tokens (from Carbon Design System + NEXT90 brand)
+
+### Colors
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `background` | `#ffffff` | Content slide background |
+| `layer-01` | `#f4f4f4` | Alternate content slide background |
+| `background-dark` | `#161616` | Data slides, dark sections |
+| `header-bg` | `#262626` | Persistent header bar |
+| `footer-bg` | `#161616` | Persistent footer bar |
+| `text-primary` | `#161616` | Body text on light backgrounds |
+| `text-primary-dark` | `#f4f4f4` | Body text on dark backgrounds |
+| `text-secondary` | `#6f6f6f` | Captions, metadata, subtitles |
+| `text-secondary-dark` | `#c6c6c6` | Secondary text on dark backgrounds |
+| `interactive` | `#0f62fe` | Carbon Blue — links, active states, accent |
+| `n90-blue` | `#4A90E2` | NEXT90 brand blue (gradient start) |
+| `n90-purple` | `#7B68EE` | NEXT90 brand purple (gradient end) |
+| `border-subtle` | `#e0e0e0` | Dividers, card borders on light |
+| `border-subtle-dark` | `#393939` | Dividers on dark backgrounds |
+| `highlight-blue` | `#93c5fd` | Pillar tags, role labels |
+
+### Typography
+
+| Element | Font | Weight | Size | Line Height |
+|---------|------|--------|------|-------------|
+| Slide title (H1) | IBM Plex Sans | 300 (Light) | 42px | 1.15 |
+| Section title (H2) | IBM Plex Sans | 400 (Regular) | 28px | 1.25 |
+| Subsection (H3) | IBM Plex Sans | 600 (SemiBold) | 16px | 1.4 |
+| Body | IBM Plex Sans | 400 | 16px | 1.65 |
+| Caption/metadata | IBM Plex Sans | 400 | 14px | 1.5 |
+| Stat number | IBM Plex Sans | 300 | 48px | 1.1 |
+| Stat label | IBM Plex Sans | 400 | 14px | 1.4 |
+| Tab nav | IBM Plex Sans | 500 | 14px | 1 |
+| Footer | IBM Plex Sans | 400 | 12px | 1 |
+
+### Spacing
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `header-height` | 48px | Persistent top bar |
+| `footer-height` | 32px | Persistent bottom bar |
+| `slide-padding` | 48px | Content inset from edges |
+| `section-gap` | 32px | Between content blocks |
+| `card-padding` | 24px | Inside cards/callouts |
+
+---
+
+## Persistent Chrome
+
+### Header Bar (every slide except Title and Closing)
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ [NEXT90 logo]          [Module A] [Module B] [Module C] [...]   │
+│                         ────────                                │
+│                         (active = blue underline)               │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+- Background: `header-bg` (#262626)
+- NEXT90 reversed logo, left-aligned, height ~24px
+- Module tabs right-aligned, `tab` typography
+- Active module: `interactive` (#0f62fe) underline, white text
+- Inactive modules: `text-secondary-dark` (#c6c6c6), no underline
+- Tabs are **dynamically generated** from the CRM-assembled module list
+- Clicking a tab navigates to that module's section divider
+
+### Footer Bar (every slide except Title and Closing)
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ Prepared for Acme Corp  |  March 2026          Slide 4 of 22   │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+- Background: `footer-bg` (#161616)
+- Left: "Prepared for [Company Name] | [Date]" — `footer` typography, `text-secondary-dark`
+- Right: "Slide N of M" — `footer` typography, `text-secondary-dark`
+- Company name and date pulled from CRM Opportunity data
+
+---
+
+## Slide Types
+
+### 1. Title Slide (Opening)
+
+- **No header or footer** — full-bleed, immersive
+- Background: "The Signal" image (satellite view of US at night, signal pulse)
+- Dark overlay gradient (darker on left)
+- NEXT90 logo: centered, large (~200px wide), reversed white
+- Below logo: "Prepared for **[Company Name]**" — H2, white
+- Below: "[Contact Name] | [Date]" — caption, `text-secondary-dark`
+- This is the entrance — it should feel like arriving
+
+### 2. Section Divider
+
+- **Header bar active** — active tab switches to this module
+- **No footer** — the divider is a moment, not a data slide
+- Background: full-bleed atmospheric image (varies by module — see Image Prompts below)
+- Left-side dark gradient overlay for text readability
+- Module title: H1, white, left-aligned, positioned in left third
+- Module subtitle: caption, `highlight-blue` (#93c5fd)
+- Example:
+  ```
+  THE SCIENCE OF INFLUENCE
+
+  Why Attribution
+  Is Broken
+  ```
+
+### 3. Content Slide
+
+- **Header + footer active**
+- Background: `background` (#ffffff) or `layer-01` (#f4f4f4) alternating
+- Title: H2, `text-primary`, left-aligned
+- Body: left-justified (NEVER centered), `body` typography
+- Carbon pictograms as visual anchors where appropriate (same library as website)
+- Callout cards: `background-dark` with `text-primary-dark`, `card-padding`
+- Stats blocks: `stat-number` + `stat-label` in horizontal row
+- All text left-justified. Centered text is never used for body copy.
+
+### 4. Data/Chart Slide
+
+- **Header + footer active**
+- Background: `background-dark` (#161616)
+- Layout: 40% left (insight text) / 60% right (visualization)
+- Left: Key stat or headline in `stat-number` size, supporting text in `body`
+- Right: Chart, IDE screenshot, gamma curve, or data visualization
+- Chart colors: `interactive` (#0f62fe) for primary, `n90-purple` for secondary, `text-secondary-dark` for gridlines
+- This is where the product proof lives
+
+### 5. Closing/CTA Slide (End)
+
+- **No header or footer** — bookend mirrors the Title slide
+- Background: "Convergence" image (road to horizon at blue hour)
+- Dark overlay gradient
+- Headline: "Let's build something true." — H1, white, left-aligned
+- Below: Brian Handrigan + Randy Cairns, titles, emails
+- Below: n90.co | Phone number
+- Optional: QR code to n90.co/contact in bottom-right
+- This should feel like an invitation, not a hard close
+
+---
+
+## Module Structure (7 Modules, CRM-Driven)
+
+Each module consists of: 1 Section Divider + 2-8 Content/Data slides.
+
+| Module | Code | Tab Label | Section Image | Purpose |
+|--------|------|-----------|---------------|---------|
+| Pain: Attribution | A1 | Attribution | "The Signal" variant | Why current attribution is broken |
+| Pain: Wasted Spend | A2 | Waste | City grid (dead zones) | Where money disappears |
+| Pain: Dead Zones | A3 | Dead Zones | Aerial grid with dark gap | Markets that don't respond |
+| Reframe | B | The IDE | Glass corridor | IDE as the answer |
+| Credibility | C | Proof | Auditorium | Patents, MRC, press, Inc 5000 |
+| Demo | D | Data | Dark canvas | Live IDE walkthrough or screenshots |
+| Methodology | E | How | Fiber optic pulse | Gamma curves, three pillars, conflict resolution |
+| Onboarding | F | Start | Convergence road | How we work together, timeline |
+| Expansion | G | Grow | Cloudscape | What comes after — beyond advertising |
+
+**CRM-driven assembly:** The Twenty CRM Opportunity determines which modules (tabs) appear. A first meeting might include A1 + B + C + F. A technical deep-dive might include A1 + A3 + D + E. The header tabs update dynamically.
+
+---
+
+## Image Prompts for Section Backgrounds
+
+### Style Guide (paste into every fresh Gemini session)
+
+> **NEXT90 presentation background style:** Photorealistic, cinematic, atmospheric. Dark base (deep navy, charcoal, near-black). Dramatic single-source or ambient lighting. Scale and infrastructure — aerial views, architectural spaces, natural phenomena. Landscape 16:9 orientation (1920x1080 minimum). The left third of the image should be relatively dark and clean for text overlay. NO people as focal point. NO text, logos, or UI. NO macro/product shots. NO saturated colors. Think documentary cinematography meets high-end editorial.
+
+### Prompt 1: "The Signal" (Title slide, Module A1)
+
+> Create a photorealistic atmospheric image: A vast nighttime aerial view of the United States from near-space altitude. City clusters glow amber and white against dark terrain. A single bright pulse of light emanates from one city, sending a faint ripple of light outward across the dark landscape — like a signal propagating. The curvature of the Earth is barely visible at the edges. Deep navy space above, dark landmass below, city lights the only warmth. The left third should be darker (less populated terrain) for text overlay. 16:9 landscape, at least 1920x1080px.
+
+### Prompt 2: "Infrastructure" (Module B — The IDE)
+
+> Create a photorealistic atmospheric image: An empty modern glass corridor shot from one end, looking down its length. Cool blue-white LED strip lighting runs along the ceiling, reflecting off polished concrete floors. Glass walls on both sides reveal dark server rooms with subtle blue indicator lights. The corridor stretches into deep shadow at the far end. Minimal, architectural, precise. The left side of the frame should be slightly darker. 16:9 landscape, at least 1920x1080px.
+
+### Prompt 3: "Geography" (Module A3 — Dead Zones)
+
+> Create a photorealistic atmospheric image: Aerial night view of a suburban grid — residential blocks lit by amber streetlights forming a geometric pattern. One rectangular area in the lower-right quadrant is conspicuously dark — a dead zone with no lights. The contrast between the lit grid and the dark gap is the focal point. Shot from directly above, flat perspective. Deep navy sky. The left third of the image should show the lit grid pattern for text overlay readability. 16:9 landscape, at least 1920x1080px.
+
+### Prompt 4: "Weather" (Module G — Beyond Advertising)
+
+> Create a photorealistic atmospheric image: Dramatic cloudscape from high altitude — massive cumulus clouds building over flat agricultural terrain at golden hour. The sun is low on the right horizon, casting long amber light across the cloud tops while the land below is in deep blue shadow. A river cuts through the patchwork farmland below. The left side of the frame is dominated by dark cloud shadow, creating a natural text zone. Scale is vast — this is weather as a force, not decoration. 16:9 landscape, at least 1920x1080px.
+
+### Prompt 5: "Dark Canvas" (Module D — Data slides)
+
+> Create a photorealistic atmospheric image: An abstract minimalist composition — a vast dark surface (like polished obsidian or deep water at night) with very subtle texture. A single thin line of cool blue-white light crosses the lower third horizontally, like a distant horizon or a data baseline. The image is 95% dark negative space with just enough texture to not be flat black. Cinematic grain. 16:9 landscape, at least 1920x1080px.
+
+### Prompt 6: "Convergence" (Module F — Onboarding, Closing slide)
+
+> Create a photorealistic atmospheric image: A single straight road stretching to the horizon at blue hour (just after sunset). The sky is a deep gradient from dark navy above to a thin amber band at the horizon. Streetlights on both sides create a perfect vanishing point perspective. Flat Midwest terrain on either side — open, expansive, nothing competing for attention. The road is the only subject. The left third should be open sky for text. 16:9 landscape, at least 1920x1080px.
+
+### Prompt 7: "Observatory" (Module C — Credibility)
+
+> Create a photorealistic atmospheric image: Interior of a large empty auditorium or lecture hall, shot from the back row looking toward the stage. A single podium is lit by a warm spotlight. The seats are empty. The rest of the space fades into deep shadow. Architectural details — tiered seating, acoustic panels, wood and concrete — are barely visible in ambient light. The mood is anticipatory, serious, earned. 16:9 landscape, at least 1920x1080px.
+
+### Prompt 8: "Pulse" (Module E — Methodology, transitions)
+
+> Create a photorealistic atmospheric image: Extreme close-up of fiber optic strands carrying light — but shot with shallow depth of field so most strands are soft bokeh while 2-3 strands in the center are sharp, carrying bright blue and amber light. Background is pure black. The lit strands should curve from the right side of frame toward the left, leaving the left third dark for text. 16:9 landscape, at least 1920x1080px.
+
+---
+
+## Rules
+
+- **Left-justified text always.** Never center body text.
+- **No gradient on headings.** Gradients are ONLY for the NEXT90 logo / IDE typography.
+- **Carbon Design System rules.** White or `layer-01` for content backgrounds. Dark (`#161616`) for data slides. `interactive` blue for accents.
+- **Pictograms from @carbon/pictograms only.** No hand-made SVGs.
+- **IBM Plex Sans everywhere.** No fallback to system fonts in the template.
+- **Fresh Gemini session per image.** Old sessions bleed context.
+- **Remove Gemini starburst watermark** from bottom-right of all generated images.
+# NEXT90 Image Asset Manifest
+
+All images are served locally from `/n90-assets/`. The AI should select images based on the slide module and content topic.
+
+## Hero/Background Images
+
+| Path | Module | When to Use |
+|------|--------|-------------|
+| `/n90-assets/images/live-map-hero.jpg` | Title, Closing | Globe from space with activity markers — represents the scale and reach of the IDE. Use for opening and closing slides (bookend). |
+| `/n90-assets/images/about-hero.jpg` | Credibility | Satellite view of US at night — represents national scale. Use for about/credibility sections. |
+| `/n90-assets/images/blog-campaign-reviews.jpg` | The Problem | Dark boardroom with spotlight on report — represents campaign reviews that start with the conclusion. Use for attribution/measurement problem slides. |
+| `/n90-assets/images/blog-what-advertisers-need.jpg` | The Engine | Lighthouse beam across dark ocean — represents what measurement illuminates vs. what stays dark. Use for methodology or solution slides. |
+| `/n90-assets/images/blog-why-were-building.jpg` | Origin Story | Highway converging to vanishing point at dusk — represents the convergence of Brian and Randy's paths. Use for company story or vision slides. |
+
+## Logos
+
+| Path | Context |
+|------|---------|
+| `/n90-assets/logos/next90-logo-new-tight.svg` | Dark logo on white/light backgrounds (header bar) |
+| `/n90-assets/logos/next90-logo-new2-reversed-tight.png` | White/reversed logo on dark backgrounds (title, closing, section dividers) |
+
+## Pictograms (60 Carbon SVGs at `/n90-assets/pictograms/`)
+
+### Three Pillars
+- `context.svg` — Context pillar (what else was happening)
+- `geography.svg` — Geography pillar (which market)
+- `time.svg` — Time pillar (when did it happen)
+
+### IDE Flywheel
+- `ingest.svg` — Data ingestion
+- `unify.svg` — Taxonomy unification
+- `connect.svg` — Journey connection
+- `articulate.svg` — Dashboard articulation
+- `feedback.svg` — Platform feedback loop
+- `optimize.svg` — Budget optimization
+- `predict.svg` — Predictive modeling
+
+### Non-Advertising Signals
+- `weather.svg` — Weather influence
+- `demographics.svg` — Demographic data
+- `agriculture.svg` — Agricultural signals
+
+### Measurement Concepts
+- `conversion.svg` — Conversion tracking
+- `data-insight.svg` — Data insights
+- `chart--multi-type.svg` — Multi-type charts
+- `coverage-gap.svg` — Coverage gaps
+- `dead-zone.svg` — Linear dead zones
+- `cross-channel.svg` — Cross-channel measurement
+- `stimulus.svg` — Ad stimulus
+- `response.svg` — Response measurement
+- `target.svg` — Targeting
+- `target-area.svg` — Geographic targeting
+
+### Infrastructure
+- `infrastructure.svg` — Technical infrastructure
+- `ide-engine.svg` — IDE engine
+- `ide-data.svg` — IDE data processing
+- `ide-insight.svg` — IDE insights
+
+### Audiences
+- `agencies.svg` — Agency audience
+- `advertisers.svg` — Advertiser audience
+- `publishers.svg` — Publisher audience
+
+### Media
+- `television.svg` — TV/broadcast
+- `websites.svg` — Web/digital
+- `telephone.svg` — Phone/calls
+- `daypart.svg` — Daypart analysis
+- `genre-performance.svg` — Genre performance
+- `viewer-mindset.svg` — Viewer mindset
+
+### Geography
+- `globe--locations.svg` — Global locations
+- `heat--map--02.svg` — Heat map
+- `location.svg` — Location marker
+- `earth.svg` — Earth/globe
+- `world--community--grid.svg` — World grid
+
+### Business
+- `expand-scope.svg` — Scope expansion
+- `new-revenue-streams.svg` — New revenue
+- `retain-client.svg` — Client retention
+- `differentiate.svg` — Differentiation
+- `home-profile.svg` — Household profile
+- `group.svg` — Group/team
+- `magnify.svg` — Investigation/detail
+
+### Brand
+- `truth.svg` — Truth (NEXT90 core value)
+- `origin.svg` — Origin story
+- `milestone.svg` — Milestones
+- `transform.svg` — Transformation
+
+### Warnings (neutral, not red)
+- `resolve-proportional.svg` — Proportional resolution
+- `warning-inflate.svg` — Inflation warning
+- `warning-arbitrary.svg` — Arbitrary warning
+
+### Time
+- `time--lapse.svg` — Time lapse
+- `calendar.svg` — Calendar/scheduling
+- `touch--screen.svg` — Interactive/touch
+
+## Image Selection Rules
+
+1. Title and Closing slides always use `live-map-hero.jpg` (globe with activity)
+2. Section dividers select based on module: Problem → boardroom, Engine → lighthouse, Proof → satellite, Data → convergence road
+3. Pictograms must match the concept being described — never reuse a pictogram with a different meaning
+4. Never use red/error styling on competitor comparisons — use neutral gray
+5. Background images use gradient-split treatment (never full-bleed on content slides)
