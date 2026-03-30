@@ -155,6 +155,22 @@ Existing:             "Add the next client/market"
 - **Dashboard screenshots are user-provided** — never generate fake dashboard images
 - **Never use stock photos** — all imagery must be atmospheric/editorial matching the brand
 
+## Image Generation Rules (When New Images Are Needed)
+Use a fresh Gemini session for each image. Paste this style guide first:
+
+> **NEXT90 image style:** Photorealistic, cinematic, atmospheric. Dark base (deep navy, charcoal, near-black). Dramatic single-source or ambient lighting. Scale and infrastructure — aerial views, architectural spaces, natural phenomena. Landscape 16:9 orientation (minimum 2400x1260px). The left third should be relatively dark and clean for text overlay. NO people as focal point. NO text, logos, or UI elements. NO macro/product shots. NO saturated colors. Think documentary cinematography meets high-end editorial.
+
+### Rules for Generated Images
+- Fresh Gemini session every time — old sessions bleed context and degrade quality
+- Remove the Gemini starburst watermark from bottom-right (crop 100-150px from edges)
+- Run through `scripts/process-hero-image.py` for resolution safety gate
+- Minimum resolution: 2400x1260px (2x retina for 1200x630 display)
+- Output format: JPG at quality 90 for photos, PNG for graphics with transparency
+- Left third must be dark/clean for gradient-split text overlay
+- Color palette: deep navy, charcoal, cool blue tones with occasional warm amber/gold accents
+- Subjects: infrastructure at scale — highways, cities, satellite views, weather systems, server corridors, ocean, fiber optics
+- Never: people as focal point, text, logos, UI, macro shots, bright saturated colors, brass/antique aesthetics
+
 ## Prospect Research (When Customizing for a Specific Company)
 When generating a deck for a named prospect, research the company to customize content:
 
