@@ -75,31 +75,79 @@ After downloading the PPTX, the user can:
 - **Wants:** Evidence that broadcast drives measurable digital response
 - **Modules:** A1 (Attribution) + E (Methodology) + D (Demo) + C (Credibility)
 
-## Meeting Stages
+## Deck Types (Cognitive Journey of the Prospect)
 
-### Stage 1: First Meeting / Discovery
-- **Goal:** Establish the problem, build credibility, earn the next meeting
-- **Tone:** Educational, problem-solving, not product-focused
-- **Modules:** A1 (Attribution broken) + B (IDE reframe) + C (Credibility) + F (Next steps)
-- **Duration:** 6-10 slides, 15-20 minutes
-- **Do:** Lead with their pain, show you understand the industry
-- **Don't:** Demo the product yet, show pricing, overwhelm with data
+The presentation system follows the prospect's cognitive journey — not our product catalog. Each deck type corresponds to where the prospect IS in their thinking, not where we want them to be.
 
-### Stage 2: Technical Deep-Dive
-- **Goal:** Prove the science, show the data, demonstrate the product
-- **Tone:** Technical, evidence-based, specific to their use case
-- **Modules:** A1 + A3 (Dead Zones) + E (Methodology) + D (Demo/Dashboard) + G (Expansion)
-- **Duration:** 12-18 slides, 30-45 minutes
-- **Do:** Show gamma curves, geographic resolution, actual dashboard output
-- **Don't:** Repeat the problem framing they already heard
+### Deck 1: "What is this?" — The Introduction
+- **Prospect state:** Curious. Heard about NEXT90 from a referral, website, or event. Doesn't know what the IDE does yet.
+- **Goal:** Establish the problem they already feel, reframe it, build enough trust to earn the next meeting.
+- **Tone:** Educational. Solve their problem, don't pitch a product. Use their industry language.
+- **Pre-NDA:** Yes — no proprietary methodology details
+- **Modules:** A1/A2/A3 (audience-specific pain, pick one) → B (IDE reframe, high-level) → C (credibility, brief) → closing
+- **Slides:** 6-8 slides, 15-20 minutes
+- **CTA:** "Let's look at your data"
+- **Do:** Lead with their pain. Use the Challenge+Outcome template. Show you understand the industry.
+- **Don't:** Demo the product. Show gamma curves. Mention NDA. Overwhelm with data.
 
-### Stage 3: Proposal / Close
-- **Goal:** Summarize value, present onboarding plan, get commitment
-- **Tone:** Confident, specific to their business, forward-looking
-- **Modules:** B (IDE) + C (Credibility) + D (Demo with their market data) + F (Onboarding) + closing
-- **Duration:** 8-12 slides, 20-30 minutes
-- **Do:** Reference specific insights from their data, show the onboarding timeline
-- **Don't:** Re-argue the problem, introduce new concepts
+### Deck 2: "Is this real?" — The Validation Meeting
+- **Prospect state:** Interested but skeptical. Wants proof. Wants to understand the science at a high level. May have technical people in the room.
+- **Goal:** Prove credibility, show the methodology is sound, earn the NDA.
+- **Tone:** Evidence-based. Specific. Data-driven but accessible.
+- **Pre-NDA:** Yes — show published science (gamma curve shape, academic validation, MRC contribution) but NOT the proprietary math or conflict resolution details
+- **Modules:** Brief A recap → B (three pillars, deeper) → C (full credibility: patents, MRC, press, Inc 5000) → E (methodology preview, pre-NDA level) → closing
+- **Slides:** 8-12 slides, 20-30 minutes
+- **CTA:** "Sign the NDA so we can show you the real thing"
+- **Do:** Show the gamma curve (shape, not parameters). Reference academic studies. Show the team. Use the Timeline template.
+- **Don't:** Give away the methodology details. Show their data yet. Rush to a demo.
+
+### Deck 3: "Show me with my data" — The Demo
+- **Prospect state:** NDA signed. They want to see it work. They may have shared data or identified specific markets/campaigns to analyze.
+- **Goal:** Demonstrate the IDE with data relevant to their business. This is where they go from "interesting" to "I need this."
+- **Tone:** Hands-on. Specific to their markets, channels, and campaigns. Technical where needed.
+- **Post-NDA:** Yes — show full methodology, proprietary parameters, conflict resolution
+- **Modules:** D (dashboard output, their data if available) → E (full methodology: gamma math, conflict resolution, validation) → A3 (dead zones in their markets) → B (how the IDE would work for them specifically) → G (expansion: beyond advertising signals relevant to their business)
+- **Slides:** 12-18 slides, 30-45 minutes (plus live demo time)
+- **CTA:** "Let's talk about getting started"
+- **Do:** Show dashboard screenshots. Walk through a real campaign analysis. Show geographic resolution in their markets. Use the Dashboard template. Let them ask questions.
+- **Don't:** Repeat the intro. Re-argue the problem. Present generic data when you have their specifics.
+
+### Deck 4: "What would this look like for us?" — The Business Case
+- **Prospect state:** They believe the product works. Now they need to understand what changes in their workflow, what data they need to provide, and what the timeline looks like.
+- **Goal:** Make the path to adoption concrete. Answer "what do I need to do, and when does it start working?"
+- **Tone:** Practical. Forward-looking. Specific to their organization.
+- **Post-NDA:** Yes
+- **Modules:** F (onboarding: data sources → integration → calibration → go live → feedback loop) → D (what their dashboard will look like) → B (how the IDE integrates with their existing platforms — Google, Meta, DSPs) → G (expansion path: additional markets, channels, advertisers)
+- **Slides:** 8-12 slides, 20-30 minutes
+- **CTA:** "Here's the onboarding timeline — let's set a start date"
+- **Do:** Show the Numbered Steps template. Be specific about data requirements. Reference their existing tech stack. Use the Timeline template for 30/60/90 days.
+- **Don't:** Re-sell the product. Show methodology again. Introduce new concepts.
+
+### Deck 5: "Let's do this" — The Proposal
+- **Prospect state:** Ready to commit. Needs the formal proposal to take to their team/procurement/leadership.
+- **Goal:** Summarize everything discussed, present the formal engagement, get the signature.
+- **Tone:** Confident. Concise. Board-ready. Everything they need to say yes.
+- **Post-NDA:** Yes
+- **Modules:** Brief recap (1-2 slides summarizing insights from the demo) → F (onboarding plan, specific to their data) → C (credibility summary) → closing with specific terms
+- **Slides:** 6-10 slides, 15-20 minutes
+- **CTA:** "Sign and we start next week" / "Here's the onboarding timeline"
+- **Do:** Reference specific insights from THEIR data. Include the onboarding timeline with dates. Use the Team template. Make it easy to forward to their boss.
+- **Don't:** Introduce new information. Re-demo. Include dense methodology slides their procurement team won't read.
+
+### For Existing Clients (Module G Focus)
+- **Prospect state:** Already using the IDE. Want to expand: add another advertiser (agency), another market, another channel, or go beyond advertising.
+- **Modules:** G (expansion) → D (new dashboard views) → A3 (new dead zones in new markets)
+- **CTA:** "Add the next client/market/channel"
+
+### CTA Progression Across the Journey
+```
+Deck 1 (Intro):      "Let's look at your data"
+Deck 2 (Validation):  "Sign the NDA so we can show you the real thing"
+Deck 3 (Demo):        "Let's talk about getting started"
+Deck 4 (Business):    "Here's the onboarding timeline"
+Deck 5 (Proposal):    "Sign and we start next week"
+Existing:             "Add the next client/market"
+```
 
 ## Image Policy
 - **Use approved library first** — 27 hero images + 60 pictograms bundled in /n90-assets/
