@@ -91,7 +91,7 @@ const DataSlideLayout: React.FC<DataSlideLayoutProps> = ({ data: slideData }) =>
         display: 'flex', alignItems: 'center', padding: '0 32px',
         position: 'absolute', top: 0, left: 0, right: 0, zIndex: 20,
       }}>
-        <img src="https://n90.co/logos/next90-logo-new-tight.svg" alt="NEXT90" style={{ height: '18px' }} />
+        <img src="https://staging.n90.co/logos/next90-logo-new-tight.svg" alt="NEXT90" style={{ height: '18px' }} />
         <div style={{ marginLeft: 'auto', display: 'flex', gap: 0 }}>
           {tabs.map(tab => (
             <span key={tab} style={{

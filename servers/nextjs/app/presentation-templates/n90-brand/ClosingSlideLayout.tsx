@@ -27,7 +27,7 @@ const closingSlideSchema = z.object({
   contactEmail2: z.string().min(5).max(50).default('randy@n90.co').meta({ description: "Second co-founder email" }),
   website: z.string().min(3).max(30).default('n90.co').meta({ description: "Website URL" }),
   backgroundImage: ImageSchema.default({
-    __image_url__: 'https://n90.co/images/live-map-hero.jpg',
+    __image_url__: 'https://staging.n90.co/images/live-map-hero.jpg',
     __image_prompt__: 'Globe from space showing US with glowing activity markers'
   }).meta({
     description: "Globe image — same as title slide for bookend effect",
@@ -42,7 +42,7 @@ interface ClosingSlideLayoutProps {
 }
 
 const ClosingSlideLayout: React.FC<ClosingSlideLayoutProps> = ({ data: slideData }) => {
-  const bgUrl = slideData?.backgroundImage?.__image_url__ || 'https://n90.co/images/live-map-hero.jpg'
+  const bgUrl = slideData?.backgroundImage?.__image_url__ || 'https://staging.n90.co/images/live-map-hero.jpg'
 
   return (
     <div
@@ -64,7 +64,7 @@ const ClosingSlideLayout: React.FC<ClosingSlideLayoutProps> = ({ data: slideData
       <div className="relative z-10 flex flex-col h-full" style={{ padding: '48px 64px' }}>
         {/* Logo */}
         <img
-          src={(slideData as any)?.__logo_url__ || 'https://n90.co/images/next90-logo-new2-reversed-tight.png'}
+          src={(slideData as any)?.__logo_url__ || 'https://staging.n90.co/images/next90-logo-new2-reversed-tight.png'}
           alt="NEXT90" style={{ height: '22px', width: 'auto' }}
         />
 

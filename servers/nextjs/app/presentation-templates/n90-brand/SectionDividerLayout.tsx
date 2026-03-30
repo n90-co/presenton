@@ -20,7 +20,7 @@ const sectionDividerSchema = z.object({
     description: "Which cognitive journey tab is active (The Problem, The Engine, The Proof, Your Data, Next Steps)",
   }),
   backgroundImage: ImageSchema.default({
-    __image_url__: 'https://n90.co/blog-campaign-reviews.jpg',
+    __image_url__: 'https://staging.n90.co/blog-campaign-reviews.jpg',
     __image_prompt__: 'Dark atmospheric boardroom with spotlight on report, cinematic'
   }).meta({
     description: "Atmospheric image for right side — gradient-split treatment",
@@ -35,7 +35,7 @@ interface SectionDividerLayoutProps {
 }
 
 const SectionDividerLayout: React.FC<SectionDividerLayoutProps> = ({ data: slideData }) => {
-  const bgUrl = slideData?.backgroundImage?.__image_url__ || 'https://n90.co/blog-campaign-reviews.jpg'
+  const bgUrl = slideData?.backgroundImage?.__image_url__ || 'https://staging.n90.co/blog-campaign-reviews.jpg'
   const active = slideData?.activeTab || 'The Problem'
   const tabs = ['The Problem', 'The Engine', 'The Proof', 'Your Data', 'Next Steps']
 
@@ -64,7 +64,7 @@ const SectionDividerLayout: React.FC<SectionDividerLayoutProps> = ({ data: slide
         display: 'flex', alignItems: 'center', padding: '0 32px',
         position: 'absolute', top: 0, left: 0, right: 0, zIndex: 20,
       }}>
-        <img src="https://n90.co/logos/next90-logo-new-tight.svg" alt="NEXT90" style={{ height: '18px' }} />
+        <img src="https://staging.n90.co/logos/next90-logo-new-tight.svg" alt="NEXT90" style={{ height: '18px' }} />
         <div style={{ marginLeft: 'auto', display: 'flex', gap: 0 }}>
           {tabs.map(tab => (
             <span key={tab} style={{
