@@ -4,26 +4,26 @@ import { ImageSchema } from '../defaultSchemes'
 
 export const layoutId = 'n90-title-slide'
 export const layoutName = 'NEXT90 Title Slide'
-export const layoutDescription = 'Opening title slide with full-bleed atmospheric background image, NEXT90 logo centered, prospect company name, contact name, and date. Dark cinematic aesthetic. Use for the first slide of any presentation.'
+export const layoutDescription = 'Opening title slide with gradient-split layout: dark left with text, atmospheric image fading in from right. NEXT90 logo, prospect company name, contact, date. Use as the first slide.'
 
 const titleSlideSchema = z.object({
-  title: z.string().min(3).max(60).default('The Insights & Data Engine').meta({
-    description: "Presentation title or tagline — what this deck is about",
+  title: z.string().min(3).max(80).default('The Insights & Data Engine').meta({
+    description: "Presentation title — what this deck is about",
   }),
   companyName: z.string().min(2).max(80).default('Acme Corp').meta({
-    description: "Prospect company name this presentation is prepared for",
+    description: "Prospect company name",
   }),
   contactName: z.string().min(2).max(60).default('Jane Smith').meta({
-    description: "Name of the prospect contact receiving this presentation",
+    description: "Prospect contact name",
   }),
   presentationDate: z.string().min(2).max(30).default('March 2026').meta({
-    description: "Date of the presentation — use current month and year",
+    description: "Presentation date — use current month and year",
   }),
   backgroundImage: ImageSchema.default({
-    __image_url__: 'https://n90.co/about-hero.jpg',
-    __image_prompt__: 'Satellite view of United States at night with city lights glowing amber against dark terrain'
+    __image_url__: 'https://n90.co/images/live-map-hero.jpg',
+    __image_prompt__: 'Globe from space showing US with glowing activity markers across cities and TV markets'
   }).meta({
-    description: "Full-bleed atmospheric background image — dark, cinematic, aerial or landscape",
+    description: "Atmospheric background image — positioned right with gradient fade left",
   }),
 })
 
@@ -35,68 +35,61 @@ interface TitleSlideLayoutProps {
 }
 
 const TitleSlideLayout: React.FC<TitleSlideLayoutProps> = ({ data: slideData }) => {
+  const bgUrl = slideData?.backgroundImage?.__image_url__ || 'https://n90.co/images/live-map-hero.jpg'
+
   return (
     <div
       className="w-full rounded-sm max-w-[1280px] shadow-lg max-h-[720px] aspect-video relative z-20 mx-auto overflow-hidden"
-      style={{ fontFamily: "'IBM Plex Sans', system-ui, sans-serif" }}
+      style={{ fontFamily: "'IBM Plex Sans', system-ui, sans-serif", backgroundColor: 'var(--cds-background-inverse, #161616)' }}
     >
-      {/* Background Image */}
+      {/* Gradient-split background: image right, dark fade left */}
       <div className="absolute inset-0">
-        <img
-          src={slideData?.backgroundImage?.__image_url__ || 'https://n90.co/about-hero.jpg'}
-          alt=""
-          className="w-full h-full object-cover"
-        />
-        {/* Dark overlay with left-side gradient */}
-        <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to right, rgba(22,22,22,0.92) 0%, rgba(22,22,22,0.75) 40%, rgba(22,22,22,0.5) 70%, rgba(22,22,22,0.35) 100%)'
+        <div className="absolute right-0 top-0 bottom-0" style={{
+          width: '55%',
+          backgroundImage: `url(${bgUrl})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }} />
-        {/* Bottom fade */}
         <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to top, rgba(22,22,22,0.8) 0%, transparent 40%)'
+          background: 'linear-gradient(to right, var(--cds-background-inverse, #161616) 40%, rgba(22,22,22,0.6) 65%, transparent 100%)',
         }} />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col h-full px-16 py-12">
-        {/* Logo top-left */}
-        <div className="mb-auto">
-          {(slideData as any)?.__logo_url__ ? (
-            <img src={(slideData as any).__logo_url__} alt="NEXT90" className="h-8" />
-          ) : (
-            <span className="text-2xl font-light tracking-tight" style={{ color: '#f4f4f4' }}>
-              NEXT<span style={{ color: '#0f62fe' }}>90</span>
-            </span>
-          )}
-        </div>
+      <div className="relative z-10 flex flex-col h-full" style={{ padding: '48px 64px' }}>
+        {/* Logo */}
+        <img
+          src={(slideData as any)?.__logo_url__ || 'https://n90.co/images/next90-logo-new2-reversed-tight.png'}
+          alt="NEXT90"
+          style={{ height: '22px', width: 'auto' }}
+        />
 
-        {/* Center content */}
-        <div className="flex flex-col items-start justify-center flex-1 max-w-xl">
-          {/* Title */}
-          <h1 className="text-5xl font-light leading-tight mb-6" style={{ color: '#f4f4f4' }}>
+        {/* Title — centered vertically, left-aligned */}
+        <div className="flex flex-col justify-center flex-1" style={{ maxWidth: '500px' }}>
+          <h1 style={{
+            fontSize: '44px',
+            fontWeight: 300,
+            lineHeight: 1.15,
+            color: 'var(--cds-text-on-color, #f4f4f4)',
+            margin: '0 0 24px',
+            textAlign: 'left',
+          }}>
             {slideData?.title || 'The Insights & Data Engine'}
           </h1>
-
-          {/* Accent line */}
-          <div className="w-16 h-0.5 mb-6" style={{ backgroundColor: '#0f62fe' }} />
-
-          {/* Prepared for */}
-          <p className="text-lg mb-1" style={{ color: '#c6c6c6' }}>
+          <p style={{ fontSize: '15px', color: 'var(--cds-text-helper, #c6c6c6)', margin: '0 0 4px', textAlign: 'left' }}>
             Prepared for
           </p>
-          <p className="text-2xl font-medium mb-8" style={{ color: '#f4f4f4' }}>
+          <p style={{ fontSize: '28px', fontWeight: 400, color: 'var(--cds-text-on-color, #f4f4f4)', margin: 0, textAlign: 'left' }}>
             {slideData?.companyName || 'Acme Corp'}
           </p>
         </div>
 
-        {/* Bottom: contact + date */}
-        <div className="flex items-end justify-between mt-auto">
-          <p className="text-sm" style={{ color: '#8d8d8d' }}>
-            {slideData?.contactName || 'Jane Smith'} &middot; {slideData?.presentationDate || 'March 2026'}
-          </p>
-          <p className="text-xs" style={{ color: '#525252' }}>
-            Confidential
-          </p>
+        {/* Footer */}
+        <div className="flex justify-between items-end">
+          <span style={{ fontSize: '12px', color: 'var(--cds-text-placeholder, #8d8d8d)' }}>
+            {slideData?.contactName || 'Jane Smith'}  ·  {slideData?.presentationDate || 'March 2026'}
+          </span>
+          <span style={{ fontSize: '12px', color: 'var(--cds-text-disabled, #525252)' }}>Confidential</span>
         </div>
       </div>
     </div>

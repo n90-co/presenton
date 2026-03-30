@@ -4,37 +4,47 @@ import { ImageSchema } from '../defaultSchemes'
 
 export const layoutId = 'n90-data-slide'
 export const layoutName = 'NEXT90 Data Slide'
-export const layoutDescription = 'Dark background slide for data visualization, charts, statistics, and metrics. Split layout: insight text on the left 40%, chart or image on the right 60%. Use for presenting data, IDE screenshots, gamma curves, or any quantitative evidence.'
+export const layoutDescription = 'Dark gradient-split slide for data: narrative text and stats on left, chart image or visualization on right. Use for gamma curves, market maps, IDE screenshots, or any quantitative evidence.'
 
 const metricSchema = z.object({
   value: z.string().min(1).max(20).default('200M+').meta({
-    description: "Metric value — large stat number (e.g. 200M+, 64%, 254)",
+    description: "Metric value — large stat number",
   }),
   label: z.string().min(2).max(60).default('ad airings traced').meta({
-    description: "Metric label — what this number represents",
+    description: "What this number represents",
   }),
 })
 
 const dataSlideSchema = z.object({
+  sectionLabel: z.string().min(2).max(40).default('WHAT WE\'VE BUILT').meta({
+    description: "Section label — uppercase, short",
+  }),
   title: z.string().min(3).max(60).default('The Infrastructure Behind the Engine').meta({
-    description: "Slide heading — describes what data is being shown",
+    description: "Slide heading",
   }),
-  insight: z.string().min(10).max(250).default('Real-time detection across 254 TV markets. Microsecond event ordering. Over a million geographic entities. The IDE processes billions of events to trace influence from ad exposure to revenue.').meta({
-    description: "Key insight or narrative text — the story behind the data",
+  insight: z.string().min(10).max(300).default('Real-time detection across 254 TV markets. Microsecond event ordering. Over a million geographic entities.').meta({
+    description: "Narrative text explaining the data",
   }),
-  metrics: z.array(metricSchema).min(2).max(4).default([
-    { value: '200M+', label: 'ad airings traced across North America' },
-    { value: '254', label: 'TV markets including Canadian broadcast' },
-    { value: '50+', label: 'patents in cross-media technology' },
-    { value: '1M+', label: 'geographic entities across US and Canada' },
-  ]).meta({
-    description: "2-4 key metrics with large stat values",
+  highlightStat: z.string().min(1).max(20).default('64%').meta({
+    description: "One big highlight stat shown in blue",
+  }),
+  highlightLabel: z.string().min(2).max(80).default('of TV-attributed sessions within 90 seconds').meta({
+    description: "Label for the highlight stat",
+  }),
+  metrics: z.array(metricSchema).min(0).max(4).default([]).meta({
+    description: "Optional 2-4 key metrics with stat values — shown if no chart image",
   }),
   chartImage: ImageSchema.default({
     __image_url__: '',
-    __image_prompt__: 'Data visualization dashboard with gamma curve chart showing TV ad response decay over time'
+    __image_prompt__: 'Data visualization showing gamma response curve with TV ad response decay over time'
   }).meta({
-    description: "Optional chart image, IDE screenshot, or data visualization for the right panel",
+    description: "Chart image, IDE screenshot, or map for the right panel",
+  }),
+  backgroundImage: ImageSchema.default({
+    __image_url__: '',
+    __image_prompt__: 'Globe map showing illuminated TV markets across North America at night'
+  }).meta({
+    description: "Optional atmospheric image for right side (gradient-split treatment)",
   }),
 })
 
@@ -46,82 +56,114 @@ interface DataSlideLayoutProps {
 }
 
 const DataSlideLayout: React.FC<DataSlideLayoutProps> = ({ data: slideData }) => {
-  const metrics = slideData?.metrics || Schema._def.defaultValue().metrics
+  const companyName = (slideData as any)?.__companyName__
+  const metrics = slideData?.metrics || []
+  const chartUrl = slideData?.chartImage?.__image_url__
+  const bgUrl = slideData?.backgroundImage?.__image_url__
+  const hasRightImage = chartUrl || bgUrl
+  const tabs = ['The Problem', 'The Engine', 'The Proof', 'Your Data', 'Next Steps']
 
   return (
     <div
       className="w-full rounded-sm max-w-[1280px] shadow-lg max-h-[720px] aspect-video relative z-20 mx-auto overflow-hidden"
-      style={{ fontFamily: "'IBM Plex Sans', system-ui, sans-serif", backgroundColor: '#161616' }}
+      style={{ fontFamily: "'IBM Plex Sans', system-ui, sans-serif", backgroundColor: 'var(--cds-background-inverse, #161616)' }}
     >
-      {/* Header bar */}
-      <div className="absolute top-0 left-0 right-0 h-12 flex items-center justify-between px-16 z-20" style={{ backgroundColor: '#262626' }}>
-        <div>
-          {(slideData as any)?.__logo_url__ ? (
-            <img src={(slideData as any).__logo_url__} alt="NEXT90" className="h-5" />
-          ) : (
-            <span className="text-sm font-light tracking-tight" style={{ color: '#f4f4f4' }}>
-              NEXT<span style={{ color: '#0f62fe' }}>90</span>
-            </span>
-          )}
+      {/* Gradient-split background if we have an image */}
+      {bgUrl && (
+        <div className="absolute inset-0">
+          <div className="absolute right-0 top-0 bottom-0" style={{
+            width: '55%',
+            backgroundImage: `url(${bgUrl})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }} />
+          <div className="absolute inset-0" style={{
+            background: 'linear-gradient(to right, #161616 40%, rgba(22,22,22,0.6) 65%, transparent 100%)',
+          }} />
         </div>
-        {(slideData as any)?.__companyName__ && (
-          <span className="text-xs" style={{ color: '#8d8d8d' }}>
-            {(slideData as any).__companyName__}
-          </span>
-        )}
+      )}
+
+      {/* White header */}
+      <div style={{
+        height: '48px',
+        backgroundColor: 'var(--cds-background, #ffffff)',
+        borderBottom: '1px solid var(--cds-border-subtle, #e0e0e0)',
+        display: 'flex', alignItems: 'center', padding: '0 32px',
+        position: 'absolute', top: 0, left: 0, right: 0, zIndex: 20,
+      }}>
+        <img src="https://n90.co/logos/next90-logo-new-tight.svg" alt="NEXT90" style={{ height: '18px' }} />
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: 0 }}>
+          {tabs.map(tab => (
+            <span key={tab} style={{
+              fontSize: '12px', fontFamily: "'IBM Plex Sans', sans-serif",
+              color: tab === 'Your Data' ? '#161616' : '#6f6f6f',
+              padding: '14px 16px',
+              borderBottom: tab === 'Your Data' ? '2px solid #0f62fe' : '2px solid transparent',
+            }}>{tab}</span>
+          ))}
+        </div>
       </div>
 
-      {/* Content: 40/60 split */}
-      <div className="flex h-full pt-12">
-        {/* Left panel: text + metrics */}
-        <div className="w-2/5 flex flex-col justify-center px-16 py-10">
-          {/* Section label */}
-          <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: '#8d8d8d', letterSpacing: '0.32px' }}>
-            WHAT WE'VE BUILT
-          </p>
+      {/* Dark footer */}
+      <div style={{
+        height: '28px', backgroundColor: '#0d0d0d',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '0 32px', position: 'absolute', bottom: 0, left: 0, right: 0,
+      }}>
+        <span style={{ fontSize: '11px', color: '#525252' }}>
+          {companyName ? `Prepared for ${companyName}` : 'NEXT90'}
+        </span>
+        <span style={{ fontSize: '11px', color: '#525252' }}>n90.co</span>
+      </div>
 
+      {/* Content */}
+      <div className="relative z-10" style={{ padding: '68px 32px 48px', height: '100%', display: 'flex' }}>
+        {/* Left panel — text + stats */}
+        <div style={{ width: hasRightImage ? '45%' : '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
+          {/* Section label */}
+          <span style={{ fontSize: '10px', fontWeight: 600, textTransform: 'uppercase' as const, letterSpacing: '0.32px', color: '#8d8d8d', marginBottom: '8px' }}>
+            {slideData?.sectionLabel || 'WHAT WE\'VE BUILT'}
+          </span>
           {/* Title */}
-          <h2 className="text-2xl font-normal mb-4" style={{ color: '#f4f4f4', textAlign: 'left' }}>
+          <h2 style={{ fontSize: '28px', fontWeight: 400, color: '#f4f4f4', margin: '0 0 16px', textAlign: 'left' }}>
             {slideData?.title || 'The Infrastructure Behind the Engine'}
           </h2>
-
-          {/* Insight text */}
-          <p className="text-sm leading-relaxed mb-8" style={{ color: '#c6c6c6', textAlign: 'left', lineHeight: '1.6' }}>
+          {/* Insight */}
+          <p style={{ fontSize: '14px', lineHeight: 1.6, color: '#c6c6c6', margin: '0 0 24px', textAlign: 'left' }}>
             {slideData?.insight || Schema._def.defaultValue().insight}
           </p>
-        </div>
-
-        {/* Right panel: metrics grid or chart */}
-        <div className="w-3/5 flex flex-col justify-center px-10 py-10">
-          {slideData?.chartImage?.__image_url__ ? (
-            <img
-              src={slideData.chartImage.__image_url__}
-              alt={slideData?.title || ''}
-              className="w-full h-auto max-h-96 object-contain rounded"
-            />
-          ) : (
-            <div className="grid grid-cols-2 gap-6">
-              {metrics.map((metric: any, idx: number) => (
-                <div key={idx} className="flex flex-col">
-                  <span className="text-4xl font-light" style={{ color: '#f4f4f4' }}>
-                    {metric.value}
-                  </span>
-                  <span className="text-sm mt-2 leading-snug" style={{ color: '#8d8d8d' }}>
-                    {metric.label}
-                  </span>
-                </div>
-              ))}
+          {/* Highlight stat */}
+          {slideData?.highlightStat && (
+            <div style={{ marginTop: 'auto' }}>
+              <span style={{ fontSize: '38px', fontWeight: 300, color: 'var(--cds-interactive, #0f62fe)' }}>
+                {slideData.highlightStat}
+              </span>
+              <p style={{ fontSize: '12px', color: '#8d8d8d', margin: '4px 0 0' }}>
+                {slideData?.highlightLabel}
+              </p>
             </div>
           )}
         </div>
-      </div>
 
-      {/* Footer bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-8 flex items-center justify-between px-16" style={{ backgroundColor: '#0d0d0d' }}>
-        <span className="text-xs" style={{ color: '#525252' }}>
-          {(slideData as any)?.__companyName__ ? `Prepared for ${(slideData as any).__companyName__}` : 'NEXT90'}
-        </span>
-        <span className="text-xs" style={{ color: '#525252' }}>n90.co</span>
+        {/* Right panel — chart or metrics */}
+        {hasRightImage ? (
+          <div style={{ width: '55%', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingLeft: '24px' }}>
+            {chartUrl && (
+              <img src={chartUrl} alt={slideData?.title || ''} style={{
+                maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', borderRadius: '4px',
+              }} />
+            )}
+          </div>
+        ) : metrics.length > 0 ? (
+          <div style={{ width: '55%', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '32px', alignContent: 'center', paddingLeft: '40px' }}>
+            {metrics.map((m: any, i: number) => (
+              <div key={i}>
+                <span style={{ fontSize: '38px', fontWeight: 300, color: '#f4f4f4' }}>{m.value}</span>
+                <p style={{ fontSize: '12px', color: '#8d8d8d', marginTop: '8px' }}>{m.label}</p>
+              </div>
+            ))}
+          </div>
+        ) : null}
       </div>
     </div>
   )

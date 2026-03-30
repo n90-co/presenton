@@ -4,41 +4,33 @@ import { ImageSchema } from '../defaultSchemes'
 
 export const layoutId = 'n90-closing-slide'
 export const layoutName = 'NEXT90 Closing Slide'
-export const layoutDescription = 'Closing CTA slide with full-bleed atmospheric background, headline invitation, co-founder contact details, and website. Use as the final slide of any presentation. Dark cinematic aesthetic matching the title slide as a bookend.'
+export const layoutDescription = 'Closing CTA slide with gradient-split layout matching the title slide. Globe image right, headline and co-founder contacts left. Carbon blue CTA button. Use as the final slide.'
 
 const closingSlideSchema = z.object({
   headline: z.string().min(3).max(60).default("Let's build something true.").meta({
-    description: "Closing headline — invitation, not a hard sell. Should feel like an opening, not an ending.",
+    description: "Closing headline — invitation, not a hard sell",
   }),
-  closingText: z.string().min(10).max(200).default("The commitment is simple: represent reality. The data sometimes shows your best-performing channel isn't performing. We show you anyway. That's the commitment.").meta({
-    description: "Supporting closing statement — reinforces the trust/truth thesis",
+  closingText: z.string().min(10).max(250).default("The commitment is simple: represent reality. The data sometimes shows your best-performing channel isn't performing. We show you anyway.").meta({
+    description: "Supporting statement reinforcing the truth/trust thesis",
   }),
-  contactName1: z.string().min(2).max(50).default('Brian Handrigan').meta({
-    description: "First co-founder name",
+  emphasis: z.string().min(3).max(60).default("That's the commitment.").meta({
+    description: "Emphasized closing line — bold weight",
   }),
-  contactTitle1: z.string().min(2).max(40).default('Co-Founder').meta({
-    description: "First co-founder title",
+  ctaText: z.string().min(3).max(40).default('Start the Conversation').meta({
+    description: "CTA button text",
   }),
-  contactEmail1: z.string().min(5).max(50).default('brian@n90.co').meta({
-    description: "First co-founder email",
-  }),
-  contactName2: z.string().min(2).max(50).default('Randy Cairns').meta({
-    description: "Second co-founder name",
-  }),
-  contactTitle2: z.string().min(2).max(40).default('Co-Founder').meta({
-    description: "Second co-founder title",
-  }),
-  contactEmail2: z.string().min(5).max(50).default('randy@n90.co').meta({
-    description: "Second co-founder email",
-  }),
-  website: z.string().min(3).max(30).default('n90.co').meta({
-    description: "Website URL (without https://)",
-  }),
+  contactName1: z.string().min(2).max(50).default('Brian Handrigan').meta({ description: "First co-founder name" }),
+  contactTitle1: z.string().min(2).max(40).default('Co-Founder').meta({ description: "First co-founder title" }),
+  contactEmail1: z.string().min(5).max(50).default('brian@n90.co').meta({ description: "First co-founder email" }),
+  contactName2: z.string().min(2).max(50).default('Randy Cairns').meta({ description: "Second co-founder name" }),
+  contactTitle2: z.string().min(2).max(40).default('Co-Founder').meta({ description: "Second co-founder title" }),
+  contactEmail2: z.string().min(5).max(50).default('randy@n90.co').meta({ description: "Second co-founder email" }),
+  website: z.string().min(3).max(30).default('n90.co').meta({ description: "Website URL" }),
   backgroundImage: ImageSchema.default({
-    __image_url__: 'https://n90.co/blog-why-were-building.jpg',
-    __image_prompt__: 'Straight road stretching to horizon at blue hour with streetlights creating vanishing point perspective, Midwest terrain'
+    __image_url__: 'https://n90.co/images/live-map-hero.jpg',
+    __image_prompt__: 'Globe from space showing US with glowing activity markers'
   }).meta({
-    description: "Full-bleed atmospheric background — convergence road or similar cinematic landscape",
+    description: "Globe image — same as title slide for bookend effect",
   }),
 })
 
@@ -50,87 +42,87 @@ interface ClosingSlideLayoutProps {
 }
 
 const ClosingSlideLayout: React.FC<ClosingSlideLayoutProps> = ({ data: slideData }) => {
+  const bgUrl = slideData?.backgroundImage?.__image_url__ || 'https://n90.co/images/live-map-hero.jpg'
+
   return (
     <div
       className="w-full rounded-sm max-w-[1280px] shadow-lg max-h-[720px] aspect-video relative z-20 mx-auto overflow-hidden"
-      style={{ fontFamily: "'IBM Plex Sans', system-ui, sans-serif" }}
+      style={{ fontFamily: "'IBM Plex Sans', system-ui, sans-serif", backgroundColor: '#161616' }}
     >
-      {/* Background */}
+      {/* Gradient-split background — matching title slide */}
       <div className="absolute inset-0">
-        <img
-          src={slideData?.backgroundImage?.__image_url__ || 'https://n90.co/blog-why-were-building.jpg'}
-          alt=""
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to right, rgba(22,22,22,0.92) 0%, rgba(22,22,22,0.75) 40%, rgba(22,22,22,0.5) 70%, rgba(22,22,22,0.3) 100%)'
+        <div className="absolute right-0 top-0 bottom-0" style={{
+          width: '55%', backgroundImage: `url(${bgUrl})`,
+          backgroundSize: 'cover', backgroundPosition: 'center',
         }} />
         <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to top, rgba(22,22,22,0.85) 0%, rgba(22,22,22,0.3) 50%, transparent 100%)'
+          background: 'linear-gradient(to right, #161616 40%, rgba(22,22,22,0.6) 65%, transparent 100%)',
         }} />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col h-full px-16 py-12">
+      <div className="relative z-10 flex flex-col h-full" style={{ padding: '48px 64px' }}>
         {/* Logo */}
-        <div className="mb-auto">
-          {(slideData as any)?.__logo_url__ ? (
-            <img src={(slideData as any).__logo_url__} alt="NEXT90" className="h-8" />
-          ) : (
-            <span className="text-2xl font-light tracking-tight" style={{ color: '#f4f4f4' }}>
-              NEXT<span style={{ color: '#0f62fe' }}>90</span>
-            </span>
-          )}
-        </div>
+        <img
+          src={(slideData as any)?.__logo_url__ || 'https://n90.co/images/next90-logo-new2-reversed-tight.png'}
+          alt="NEXT90" style={{ height: '22px', width: 'auto' }}
+        />
 
-        {/* Headline */}
-        <div className="flex-1 flex flex-col justify-center max-w-xl">
-          <h2 className="text-4xl font-light leading-tight mb-4" style={{ color: '#f4f4f4' }}>
+        {/* Headline + text */}
+        <div className="flex flex-col justify-center flex-1" style={{ maxWidth: '500px' }}>
+          <h2 style={{ fontSize: '44px', fontWeight: 300, lineHeight: 1.15, color: '#f4f4f4', margin: '0 0 16px', textAlign: 'left' }}>
             {slideData?.headline || "Let's build something true."}
           </h2>
-
-          <p className="text-base leading-relaxed mb-10" style={{ color: '#c6c6c6', lineHeight: '1.65' }}>
+          <p style={{ fontSize: '15px', lineHeight: 1.65, color: '#c6c6c6', margin: '0 0 8px', textAlign: 'left' }}>
             {slideData?.closingText || Schema._def.defaultValue().closingText}
           </p>
+          <p style={{ fontSize: '16px', fontWeight: 500, color: '#f4f4f4', margin: '0 0 24px', textAlign: 'left' }}>
+            {slideData?.emphasis || "That's the commitment."}
+          </p>
 
-          {/* Contact cards */}
-          <div className="flex gap-8">
-            {/* Contact 1 */}
-            <div className="flex flex-col">
-              <span className="text-base font-medium" style={{ color: '#f4f4f4' }}>
+          {/* CTA button — Carbon interactive blue */}
+          <a style={{
+            display: 'inline-flex', alignItems: 'center', padding: '0 24px', height: '48px',
+            backgroundColor: 'var(--cds-interactive, #0f62fe)', color: '#fff',
+            textDecoration: 'none', fontSize: '13px', fontFamily: "'IBM Plex Sans', sans-serif",
+            width: 'fit-content', marginBottom: '32px',
+          }}>
+            {slideData?.ctaText || 'Start the Conversation'}
+          </a>
+
+          {/* Contacts */}
+          <div style={{ display: 'flex', gap: '48px' }}>
+            <div>
+              <p style={{ fontSize: '14px', fontWeight: 600, color: '#f4f4f4', margin: '0 0 2px' }}>
                 {slideData?.contactName1 || 'Brian Handrigan'}
-              </span>
-              <span className="text-xs font-semibold uppercase tracking-wider mt-0.5" style={{ color: '#93c5fd', letterSpacing: '0.32px' }}>
+              </p>
+              <p style={{ fontSize: '10px', fontWeight: 600, textTransform: 'uppercase' as const, letterSpacing: '0.32px', color: '#93c5fd', margin: '0 0 4px' }}>
                 {slideData?.contactTitle1 || 'Co-Founder'}
-              </span>
-              <span className="text-sm mt-1" style={{ color: '#8d8d8d' }}>
+              </p>
+              <p style={{ fontSize: '12px', color: '#8d8d8d', margin: 0 }}>
                 {slideData?.contactEmail1 || 'brian@n90.co'}
-              </span>
+              </p>
             </div>
-
-            {/* Contact 2 */}
-            <div className="flex flex-col">
-              <span className="text-base font-medium" style={{ color: '#f4f4f4' }}>
+            <div>
+              <p style={{ fontSize: '14px', fontWeight: 600, color: '#f4f4f4', margin: '0 0 2px' }}>
                 {slideData?.contactName2 || 'Randy Cairns'}
-              </span>
-              <span className="text-xs font-semibold uppercase tracking-wider mt-0.5" style={{ color: '#93c5fd', letterSpacing: '0.32px' }}>
+              </p>
+              <p style={{ fontSize: '10px', fontWeight: 600, textTransform: 'uppercase' as const, letterSpacing: '0.32px', color: '#93c5fd', margin: '0 0 4px' }}>
                 {slideData?.contactTitle2 || 'Co-Founder'}
-              </span>
-              <span className="text-sm mt-1" style={{ color: '#8d8d8d' }}>
+              </p>
+              <p style={{ fontSize: '12px', color: '#8d8d8d', margin: 0 }}>
                 {slideData?.contactEmail2 || 'randy@n90.co'}
-              </span>
+              </p>
             </div>
           </div>
         </div>
 
         {/* Bottom */}
-        <div className="flex items-end justify-between mt-auto">
-          <span className="text-sm font-medium" style={{ color: '#0f62fe' }}>
+        <div className="flex justify-between items-end">
+          <span style={{ fontSize: '14px', fontWeight: 600, color: '#0f62fe' }}>
             {slideData?.website || 'n90.co'}
           </span>
-          <span className="text-xs" style={{ color: '#525252' }}>
-            Confidential
-          </span>
+          <span style={{ fontSize: '12px', color: '#525252' }}>Confidential</span>
         </div>
       </div>
     </div>
