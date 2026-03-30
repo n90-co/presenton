@@ -61,7 +61,7 @@ const TitleSlideLayout: React.FC<TitleSlideLayoutProps> = ({ data: slideData }) 
         <img
           src={(slideData as any)?.__logo_url__ || '/n90-assets/logos/next90-logo-new2-reversed-tight.png'}
           alt="NEXT90"
-          style={{ height: '22px', width: 'auto' }}
+          style={{ height: '22px', width: 'auto', maxWidth: '120px', objectFit: 'contain', flexShrink: 0 }}
         />
 
         {/* Title — centered vertically, left-aligned */}
