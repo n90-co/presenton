@@ -302,7 +302,7 @@ When showing IDE dashboard output:
 | 1M+ | NEXT90 internal | Geographic entities across US and Canada |
 | 64% | NEXT90 IDE analysis | TV-attributed web sessions within 90 seconds of ad airing |
 | 947,000 | NEXT90 IDE | Web sessions used to calibrate gamma response curve |
-| 6 | USPTO | Patents where Brian Handrigan is named inventor |
+| 7 | USPTO | Patents where Brian Handrigan is named inventor |
 | #556 | Inc. 5000 (2023) | Company rank — 1,056% three-year revenue growth |
 | 26 years | Brian's career | Years in advertising technology |
 | 20+ years | Randy's career | Years from tech leadership to business operations |
