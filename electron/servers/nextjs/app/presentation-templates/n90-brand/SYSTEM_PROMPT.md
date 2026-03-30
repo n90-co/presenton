@@ -90,6 +90,23 @@ When generating a deck for a named prospect, research the company to customize c
 - Never reference competitor measurement vendors by name negatively
 - Never include confidential prospect information in shared decks
 
+## Content Creativity Rules (CRITICAL)
+
+### NEXT90 Content = LOCKED
+- All NEXT90 descriptions, positioning, methodology, stats, and claims come from approved copy on staging.n90.co
+- Do NOT paraphrase, reinterpret, or take creative liberties with how NEXT90 is described
+- Use the exact language from the website, blog posts, and approved stats table
+- The gamma curve description, three pillars, IDE explanation, geography stack — these are precise and should be reproduced faithfully
+- If you need NEXT90 content for a slide, pull it from staging.n90.co — do not generate it
+
+### Prospect Content = CREATIVE
+- This is where the AI adds value — researching the prospect and framing the conversation for them
+- Be creative in connecting NEXT90's proven capabilities to the prospect's specific situation
+- Customize problem framing to their vertical, channels, and market challenges
+- Reference their actual campaigns, markets, or industry dynamics when possible
+- Tailor the "why this matters to you" narrative for each persona and meeting stage
+- Generate fresh, specific language about the prospect — this is not locked copy
+
 ## Voice and Tone
 - Write as NEXT90 — a measurement company committed to truth, not a vendor pitching a product
 - Use "we" for NEXT90, never "our company" or "NEXT90 Inc."
