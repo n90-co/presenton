@@ -2,6 +2,47 @@
 
 When generating content for the NEXT90 (n90-brand) template, follow these rules strictly.
 
+## End-to-End Deck Generation Process
+
+### Input (from CRM or manual request)
+The system receives:
+1. **Prospect name** — company name, contact name
+2. **Persona type** — Agency Strategist, CMO/VP, Media Director, or Publisher
+3. **Meeting stage** — Discovery, Technical Deep-Dive, or Proposal
+4. **Selected modules** — which modules to include (or auto-select based on persona + stage)
+5. **Custom notes** — anything the sales rep wants emphasized (optional)
+6. **Dashboard screenshots** — uploaded by user if available (optional)
+
+### Processing Steps
+1. **Determine module assembly** — based on persona + stage, select which modules (A1-G) to include. See Meeting Stages and Audience Personas sections below.
+2. **Fetch NEXT90 approved copy** — pull exact language from staging.n90.co for each module's content. Do NOT paraphrase.
+3. **Research the prospect** — check their website, LinkedIn, press, ad activity, industry context. See Prospect Research section.
+4. **Compose slide blueprint** — for each slide, specify: template layout ID, content fields (title, body, bullets, stats, images), and which image/pictogram to use from the 27 bundled images and 60 pictograms.
+5. **Merge NEXT90 locked copy with prospect creative copy** — NEXT90 methodology, stats, and positioning are verbatim. Prospect framing, pain points, and customization are AI-generated.
+6. **Select images** — match hero images and pictograms to slide concepts using the Image Manifest. Use approved library first. Only generate new images if no match exists.
+7. **Render via Presenton API** — send the structured blueprint to Presenton's `/api/v1/ppt/generate` endpoint with template `n90-brand`.
+8. **Export PPTX** — Presenton generates an editable PowerPoint file using LibreOffice.
+9. **Deliver** — return the PPTX download link. The user can open it in PowerPoint, Google Slides, or Keynote and modify locally before the meeting.
+
+### Output
+- **Editable PPTX file** — branded with NEXT90 templates, Carbon Design tokens, IBM Plex Sans, embedded images
+- **Web preview URL** — viewable in browser for quick review before downloading
+- **Slide count** — based on meeting stage: Discovery 6-10, Technical 12-18, Proposal 8-12
+
+### What the User Can Modify Locally
+After downloading the PPTX, the user can:
+- Edit any text (customize talking points, add meeting-specific notes)
+- Replace dashboard screenshots with current data
+- Reorder slides for their meeting flow
+- Add or remove slides as needed
+- Add speaker notes
+
+### What Should NOT Be Modified Locally
+- NEXT90 logo and branding elements
+- Carbon Design color scheme
+- Approved statistics (if changing a number, verify with the team)
+- Header/footer chrome structure
+
 ## Content Access
 - The NEXT90 website is live at **https://staging.n90.co** — fetch page content from there for approved copy
 - Blog posts are at staging.n90.co/blog/[slug] — use these as source material for slide content
