@@ -1,1 +1,1 @@
-DEFAULT_TEMPLATES = ["general", "modern", "standard", "swift", "n90-brand"]
+DEFAULT_TEMPLATES = ["general", "modern", "standard", "swift"]
